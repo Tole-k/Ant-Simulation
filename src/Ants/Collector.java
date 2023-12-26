@@ -1,18 +1,24 @@
-public class Worker extends BlueAnt implements Fighting, Collecting {
-    private int collected_larvae;
+package Ants;
 
-    public Worker(String name, int strength, int health, Anthill anthill) {
+import AntWorld.Anthill;
+
+public class Collector extends RedAnt implements Collecting {
+    protected int collected_larvae;
+
+    public Collector(String name, int strength, int health, Anthill anthill) {
         super(name, strength, health, anthill);
         collected_larvae = 0;
     }
 
     @Override
     public void collectLarvae() {
-        if (currentVertex.number_of_larvae > 0) {
-            currentVertex.number_of_larvae -= 1;
+        if (currentVertex.getNumber_of_larvae() > 0) {
+            currentVertex.setNumber_of_larvae(currentVertex.getNumber_of_larvae() - 1);
             collected_larvae += 1;
             System.out.println("Larvae collected");
-            ReturnToAnthill();
+            if (collected_larvae >= strength) {
+                returnToAnthill();
+            }
         } else {
             System.out.println("No Larvae available");
         }
@@ -21,18 +27,7 @@ public class Worker extends BlueAnt implements Fighting, Collecting {
     @Override
     public void dropLarvae(int amount) {
         collected_larvae -= amount;
-        currentVertex.number_of_larvae += amount;
-    }
-
-    @Override
-    public void attack(Ant enemy) {
-        if (enemy instanceof RedAnt) {
-            System.out.println("Worker is attacking");
-            enemy.receiveDamage(strength);
-            ReturnToAnthill();
-        } else {
-            System.out.println("Friendly fire disabled");
-        }
+        currentVertex.setNumber_of_larvae(currentVertex.getNumber_of_larvae() + amount);
     }
 
     @Override

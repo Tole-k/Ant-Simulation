@@ -1,3 +1,7 @@
+package Ants;
+
+import AntWorld.Anthill;
+
 public class Soldier extends RedAnt implements Fighting {
     public Soldier(String name, int strength, int health, Anthill anthill) {
         super(name, strength, health, anthill);
@@ -8,7 +12,7 @@ public class Soldier extends RedAnt implements Fighting {
         if (enemy instanceof BlueAnt) {
             System.out.println("Soldier is attacking");
             enemy.receiveDamage(strength);
-            ReturnToAnthill();
+            returnToAnthill();
         } else {
             System.out.println("Friendly fire disabled");
         }

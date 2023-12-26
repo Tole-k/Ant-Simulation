@@ -1,3 +1,7 @@
+package AntWorld;
+
+import Ants.Ant;
+
 import java.util.ArrayList;
 
 public class Vertex {

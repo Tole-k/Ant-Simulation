@@ -1,3 +1,8 @@
+package Ants;
+
+import AntWorld.Anthill;
+import AntWorld.Vertex;
+
 import java.util.Stack;
 
 abstract public class Ant extends Thread implements Returning, Moving, Dying {
@@ -21,14 +26,14 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying {
     }
 
     @Override
-    public void RandomMove() {
-        Vertex next = currentVertex.neighbors.get((int) (Math.random() * currentVertex.neighbors.size()));
+    public void randomMove() {
+        Vertex next = currentVertex.getNeighbors().get((int) (Math.random() * currentVertex.getNeighbors().size()));
         path.push(next);
-        Move(next);
+        move(next);
     }
 
     @Override
-    public void Move(Vertex v) {
+    public void move(Vertex v) {
         Vertex previous = currentVertex;
         previous.removeAnt(this);
         currentVertex = v;
@@ -37,11 +42,11 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying {
     }
 
     @Override
-    public void ReturnToAnthill() {
+    public void returnToAnthill() {
         while (!path.empty()) {
             Vertex v = path.pop();
             if (v != currentVertex) {
-                Move(v);
+                move(v);
             }
         }
     }

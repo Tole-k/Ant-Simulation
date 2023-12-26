@@ -1,3 +1,5 @@
+package AntWorld;
+
 public class Anthill extends Vertex {
     private int amount_of_food;
 

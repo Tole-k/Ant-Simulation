@@ -1,3 +1,7 @@
+package Ants;
+
+import AntWorld.Anthill;
+
 abstract public class BlueAnt extends Ant {
 
     public BlueAnt(String name, int strength, int health, Anthill anthill) {
