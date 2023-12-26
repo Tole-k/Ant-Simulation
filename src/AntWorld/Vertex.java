@@ -14,13 +14,23 @@ public class Vertex {
         this.neighbors = new ArrayList<>();
         this.ants = new ArrayList<>();
     }
-
+    public Ant lookForEnemy(){
+        return null;
+    }
     public int getNumber_of_larvae() {
         return number_of_larvae;
     }
 
     public void setNumber_of_larvae(int number_of_larvae) {
         this.number_of_larvae = number_of_larvae;
+    }
+
+    public void addLarvae(int amount) {
+        number_of_larvae += amount;
+    }
+
+    public void removeLarvae(int amount) {
+        number_of_larvae -= amount;
     }
 
     public ArrayList<Ant> getAnts() {

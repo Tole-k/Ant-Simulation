@@ -15,13 +15,13 @@ public class Blunderer extends Collector {
     public void returnToAnthill() {
         while (!path.empty()) {
             Vertex v = path.pop();
-            if (v != currentVertex) {
-                move(v);
-                if (Math.random() < dropChance) {
-                    dropLarvae(1);
-                }
+            move(v);
+            if (Math.random() < dropChance) {
+                dropLarvae(1);
             }
         }
+        assert currentVertex == anthill;
+        storeLarvaeAsFood();
     }
 
     public int getDropChance() {

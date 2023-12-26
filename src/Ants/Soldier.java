@@ -17,5 +17,22 @@ public class Soldier extends RedAnt implements Fighting {
             System.out.println("Friendly fire disabled");
         }
     }
+    @Override
+    public Ant lookForEnemy()
+    {
+        return currentVertex.lookForEnemy();
+    }
+    @Override
+    public void run()
+    {
+        while (alive) {
+            randomMove();
+            Ant enemy=lookForEnemy();
+            if(enemy != null)
+            {
+                attack(enemy);
+            }
+        }
+    }
 
 }

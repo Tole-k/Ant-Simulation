@@ -15,4 +15,12 @@ public class Anthill extends Vertex {
     public void setAmount_of_food(int amount_of_food) {
         this.amount_of_food = amount_of_food;
     }
+
+    public void addFood(int amount) {
+        amount_of_food += amount;
+    }
+
+    public void removeFood(int amount) {
+        amount_of_food -= amount;
+    }
 }

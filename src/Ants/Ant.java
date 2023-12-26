@@ -13,6 +13,8 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying {
     protected Stack<Vertex> path;
     protected Vertex currentVertex;
     protected Anthill anthill;
+    protected int collected_larvae;
+    protected volatile boolean alive;
 
     public Ant(String name, int strength, int health, String color, Anthill anthill) {
         this.name = name;
@@ -23,12 +25,14 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying {
         this.anthill = anthill;
         currentVertex = anthill;
         currentVertex.addAnt(this);
+        collected_larvae = 0;
+        alive = true;
     }
 
     @Override
     public void randomMove() {
         Vertex next = currentVertex.getNeighbors().get((int) (Math.random() * currentVertex.getNeighbors().size()));
-        path.push(next);
+        path.push(currentVertex);
         move(next);
     }
 
@@ -38,22 +42,29 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying {
         previous.removeAnt(this);
         currentVertex = v;
         currentVertex.addAnt(this);
-
     }
 
     @Override
     public void returnToAnthill() {
         while (!path.empty()) {
             Vertex v = path.pop();
-            if (v != currentVertex) {
-                move(v);
-            }
+            move(v);
         }
+        assert currentVertex == anthill;
+        storeLarvaeAsFood();
+    }
+
+    public void dropLarvae(int amount) {
+        collected_larvae -= amount;
+        currentVertex.setNumber_of_larvae(currentVertex.getNumber_of_larvae() + amount);
     }
 
     @Override
     public void die() {
+        dropLarvae(collected_larvae);
         System.out.println("Ant dies");
+        alive = false;
+        Thread.currentThread().interrupt();
     }
 
     @Override
@@ -62,6 +73,11 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying {
         if (health <= 0) {
             die();
         }
+    }
+
+    public void storeLarvaeAsFood() {
+        anthill.addFood(collected_larvae);
+        collected_larvae = 0;
     }
 
     public String get_Name() {
@@ -118,5 +134,13 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying {
 
     public void setAnthill(Anthill anthill) {
         this.anthill = anthill;
+    }
+
+    public int getCollected_larvae() {
+        return collected_larvae;
+    }
+
+    public void setCollected_larvae(int collected_larvae) {
+        this.collected_larvae = collected_larvae;
     }
 }

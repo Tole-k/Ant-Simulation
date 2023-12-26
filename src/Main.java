@@ -11,5 +11,6 @@ public class Main {
         Worker worker = new Worker("work", 12, 12, anthill);
         worker.randomMove();
         worker.collectLarvae();
+        System.out.println(anthill.getAmount_of_food());
     }
 }
