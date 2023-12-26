@@ -1,8 +1,10 @@
-public class Collector extends RedAnt{
+public class Collector extends RedAnt implements Collecting {
     int collected_larvae;
-    public void collectLarvae(){
+
+    @Override
+    public void collectLarvae() {
         System.out.println("Larvae collected");
-        if(collected_larvae >=strength)
+        if (collected_larvae >= strength)
             ReturnToAnthill();
     }
 }
