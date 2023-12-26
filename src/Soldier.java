@@ -1,12 +1,17 @@
 public class Soldier extends RedAnt implements Fighting {
-    public Soldier(String name, int strength, int health, String color, Anthill anthill) {
-        super(name, strength, health, color, anthill);
+    public Soldier(String name, int strength, int health, Anthill anthill) {
+        super(name, strength, health, anthill);
     }
 
     @Override
     public void attack(Ant enemy) {
-        System.out.println("Soldier attack");
-        ReturnToAnthill();
+        if (enemy instanceof BlueAnt) {
+            System.out.println("Soldier is attacking");
+            enemy.receiveDamage(strength);
+            ReturnToAnthill();
+        } else {
+            System.out.println("Friendly fire disabled");
+        }
     }
 
 }

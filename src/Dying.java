@@ -1,3 +1,5 @@
 public interface Dying {
-    void Die();
+    void receiveDamage(int damage);
+
+    void die();
 }
