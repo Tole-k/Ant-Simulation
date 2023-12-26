@@ -1,4 +1,8 @@
 public class Worker extends BlueAnt implements Fighting, Collecting {
+    public Worker(String name, int strength, int health, String color, Anthill anthill) {
+        super(name, strength, health, color, anthill);
+    }
+
     @Override
     public void collectLarvae() {
         System.out.println("Larvae collected");
@@ -6,7 +10,7 @@ public class Worker extends BlueAnt implements Fighting, Collecting {
     }
 
     @Override
-    public void attack() {
+    public void attack(Ant enemy) {
         System.out.println("Worker attack");
         ReturnToAnthill();
     }
