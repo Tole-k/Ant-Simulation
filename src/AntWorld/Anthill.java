@@ -3,8 +3,8 @@ package AntWorld;
 public class Anthill extends Vertex {
     private int amount_of_food;
 
-    public Anthill() {
-        super(0);
+    public Anthill(String name) {
+        super(name, 0);
         amount_of_food = 0;
     }
 

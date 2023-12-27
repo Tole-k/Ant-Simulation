@@ -8,29 +8,44 @@ public class Soldier extends RedAnt implements Fighting {
     }
 
     @Override
-    public void attack(Ant enemy) {
-        if (enemy instanceof BlueAnt) {
-            System.out.println("Soldier is attacking");
+    public void attack() throws InterruptedException {
+        currentVertex.semaphore.acquire();
+        BlueAnt enemy = currentVertex.lookForBlueEnemy();
+        if (enemy != null) {
+            System.out.printf("%s, a %s ant is attacking %s, a %s ant\n", name, color, enemy.get_Name(), enemy.getColor());
             enemy.receiveDamage(strength);
+            currentVertex.semaphore.release();
             returnToAnthill();
         } else {
-            System.out.println("Friendly fire disabled");
+            System.out.printf("%s a %s ant found no enemy\n", name, color);
+            currentVertex.semaphore.release();
         }
+
     }
+
+
     @Override
-    public Ant lookForEnemy()
-    {
-        return currentVertex.lookForEnemy();
-    }
-    @Override
-    public void run()
-    {
+    public void run() {
         while (alive) {
-            randomMove();
-            Ant enemy=lookForEnemy();
-            if(enemy != null)
-            {
-                attack(enemy);
+            try {
+                randomMove();
+            } catch (InterruptedException e) {
+                break;
+            }
+            try {
+                sleep(500);
+            } catch (InterruptedException e) {
+                break;
+            }
+            try {
+                attack();
+            } catch (InterruptedException e) {
+                break;
+            }
+            try {
+                sleep(500);
+            } catch (InterruptedException e) {
+                break;
             }
         }
     }

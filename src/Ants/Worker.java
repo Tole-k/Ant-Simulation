@@ -9,43 +9,70 @@ public class Worker extends BlueAnt implements Fighting, Collecting {
     }
 
     @Override
-    public void collectLarvae() {
+    public void collectLarvae() throws InterruptedException {
+        currentVertex.semaphore.acquire();
         if (currentVertex.getNumber_of_larvae() > 0) {
             currentVertex.removeLarvae(1);
             collected_larvae += 1;
-            System.out.println("Larvae collected");
+            System.out.printf("%s, a %s ant collected a larvae\n", name, color);
+            currentVertex.semaphore.release();
             returnToAnthill();
         } else {
-            System.out.println("No Larvae available");
+            System.out.printf("%s, a %s ant found no larvae\n", name, color);
+            currentVertex.semaphore.release();
         }
+
     }
 
     @Override
-    public void attack(Ant enemy) {
-        if (enemy instanceof RedAnt) {
-            System.out.println("Worker is attacking");
+    public void attack() throws InterruptedException {
+        currentVertex.semaphore.acquire();
+        RedAnt enemy = currentVertex.lookForRedEnemy();
+        if (enemy != null) {
+            System.out.printf("%s, a %s ant is attacking %s, a %s ant\n", name, color, enemy.get_Name(), enemy.getColor());
             enemy.receiveDamage(strength);
+            currentVertex.semaphore.release();
             returnToAnthill();
         } else {
-            System.out.println("Friendly fire disabled");
+            System.out.printf("%s a %s ant found no enemy\n", name, color);
+            currentVertex.semaphore.release();
         }
-    }
-    @Override
-    public Ant lookForEnemy()
-    {
-        return currentVertex.lookForEnemy();
+
     }
 
     @Override
     public void run() {
         while (alive) {
-            randomMove();
-            Ant enemy=lookForEnemy();
-            if(enemy != null)
-            {
-                attack(enemy);
+            try {
+                randomMove();
+            } catch (InterruptedException e) {
+                break;
             }
-            collectLarvae();
+            try {
+                sleep(500);
+            } catch (InterruptedException e) {
+                break;
+            }
+            try {
+                attack();
+            } catch (InterruptedException e) {
+                break;
+            }
+            try {
+                sleep(500);
+            } catch (InterruptedException e) {
+                break;
+            }
+            try {
+                collectLarvae();
+            } catch (InterruptedException e) {
+                break;
+            }
+            try {
+                sleep(500);
+            } catch (InterruptedException e) {
+                break;
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ public class Blunderer extends Collector {
     }
 
     @Override
-    public void returnToAnthill() {
+    public void returnToAnthill() throws InterruptedException {
         while (!path.empty()) {
             Vertex v = path.pop();
             move(v);

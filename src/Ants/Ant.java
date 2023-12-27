@@ -15,6 +15,7 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying {
     protected Anthill anthill;
     protected int collected_larvae;
     protected volatile boolean alive;
+    protected Vertex previous;
 
     public Ant(String name, int strength, int health, String color, Anthill anthill) {
         this.name = name;
@@ -24,28 +25,26 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying {
         path = new Stack<>();
         this.anthill = anthill;
         currentVertex = anthill;
-        currentVertex.addAnt(this);
         collected_larvae = 0;
         alive = true;
     }
 
     @Override
-    public void randomMove() {
+    public void randomMove() throws InterruptedException {
         Vertex next = currentVertex.getNeighbors().get((int) (Math.random() * currentVertex.getNeighbors().size()));
         path.push(currentVertex);
         move(next);
     }
 
     @Override
-    public void move(Vertex v) {
-        Vertex previous = currentVertex;
-        previous.removeAnt(this);
+    public void move(Vertex v) throws InterruptedException {
+        previous = currentVertex;
+        System.out.printf("%s, a %s ant is moving from %s to %s%n", name, color, currentVertex.getName(), v.getName());
         currentVertex = v;
-        currentVertex.addAnt(this);
     }
 
     @Override
-    public void returnToAnthill() {
+    public void returnToAnthill() throws InterruptedException {
         while (!path.empty()) {
             Vertex v = path.pop();
             move(v);
@@ -62,9 +61,14 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying {
     @Override
     public void die() {
         dropLarvae(collected_larvae);
-        System.out.println("Ant dies");
+        System.out.printf("%s, a %s ant has died%n", name, color);
         alive = false;
-        Thread.currentThread().interrupt();
+        if (this instanceof BlueAnt) {
+            currentVertex.removeBlueAnt((BlueAnt) this);
+        } else if (this instanceof RedAnt) {
+            currentVertex.removeRedAnt((RedAnt) this);
+        }
+        this.interrupt();
     }
 
     @Override

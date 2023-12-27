@@ -1,7 +1,7 @@
 package AntWorld;
 
 public class Stone extends Vertex {
-    public Stone(int number_of_larvae) {
-        super(number_of_larvae);
+    public Stone(String name, int number_of_larvae) {
+        super(name, number_of_larvae);
     }
 }

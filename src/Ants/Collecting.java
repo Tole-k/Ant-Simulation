@@ -1,5 +1,5 @@
 package Ants;
 
 public interface Collecting {
-    void collectLarvae();
+    void collectLarvae() throws InterruptedException;
 }
