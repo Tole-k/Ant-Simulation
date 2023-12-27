@@ -2,77 +2,100 @@ package Ants;
 
 import AntWorld.Anthill;
 
-public class Worker extends BlueAnt implements Fighting, Collecting {
+public class Worker extends BlueAnt implements Fighting, Collecting
+{
 
-    public Worker(String name, int strength, int health, Anthill anthill) {
+    public Worker(String name, int strength, int health, Anthill anthill)
+    {
         super(name, strength, health, anthill);
     }
 
     @Override
-    public void collectLarvae() throws InterruptedException {
+    public void collectLarvae() throws InterruptedException
+    {
         currentVertex.semaphore.acquire();
-        if (currentVertex.getNumber_of_larvae() > 0) {
+        if (currentVertex.getNumber_of_larvae() > 0)
+        {
             currentVertex.removeLarvae(1);
             collected_larvae += 1;
-            System.out.printf("%s, a %s ant collected a larvae\n", name, color);
+            System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " collected a larvae\n", name);
             currentVertex.semaphore.release();
             returnToAnthill();
-        } else {
-            System.out.printf("%s, a %s ant found no larvae\n", name, color);
+        } else
+        {
+            //System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " found no larvae\n", name);
             currentVertex.semaphore.release();
         }
 
     }
 
     @Override
-    public void attack() throws InterruptedException {
+    public void attack() throws InterruptedException
+    {
         currentVertex.semaphore.acquire();
         RedAnt enemy = currentVertex.lookForRedEnemy();
-        if (enemy != null) {
-            System.out.printf("%s, a %s ant is attacking %s, a %s ant\n", name, color, enemy.get_Name(), enemy.getColor());
+        if (enemy != null)
+        {
+            //System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + "is attacking %s\n", name, enemy.get_Name());
             enemy.receiveDamage(strength);
             currentVertex.semaphore.release();
             returnToAnthill();
-        } else {
-            System.out.printf("%s a %s ant found no enemy\n", name, color);
+        } else
+        {
+            //System.out.printf(ANSI_COLOR + "%s " + ANSI_RESET + " found no enemy\n", name);
             currentVertex.semaphore.release();
         }
 
     }
 
     @Override
-    public void run() {
-        while (alive) {
-            try {
+    public void run()
+    {
+        while (alive)
+        {
+            try
+            {
                 randomMove();
-            } catch (InterruptedException e) {
+            } catch (InterruptedException e)
+            {
                 break;
             }
-            try {
-                sleep(500);
-            } catch (InterruptedException e) {
+            try
+            {
+                sleep(SLEEP_TIME);
+            } catch (InterruptedException e)
+            {
                 break;
             }
-            try {
+            try
+            {
                 attack();
-            } catch (InterruptedException e) {
+            } catch (InterruptedException e)
+            {
                 break;
             }
-            try {
-                sleep(500);
-            } catch (InterruptedException e) {
+            try
+            {
+                sleep(SLEEP_TIME);
+            } catch (InterruptedException e)
+            {
                 break;
             }
-            try {
+            try
+            {
                 collectLarvae();
-            } catch (InterruptedException e) {
+            } catch (InterruptedException e)
+            {
                 break;
             }
-            try {
-                sleep(500);
-            } catch (InterruptedException e) {
+            try
+            {
+                sleep(SLEEP_TIME);
+            } catch (InterruptedException e)
+            {
                 break;
             }
         }
+
     }
 }

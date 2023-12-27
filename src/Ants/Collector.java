@@ -2,52 +2,68 @@ package Ants;
 
 import AntWorld.Anthill;
 
-public class Collector extends RedAnt implements Collecting {
+public class Collector extends RedAnt implements Collecting
+{
 
-    public Collector(String name, int strength, int health, Anthill anthill) {
+    public Collector(String name, int strength, int health, Anthill anthill)
+    {
         super(name, strength, health, anthill);
     }
 
     @Override
-    public void collectLarvae() throws InterruptedException {
+    public void collectLarvae() throws InterruptedException
+    {
         currentVertex.semaphore.acquire();
-        if (currentVertex.getNumber_of_larvae() > 0) {
+        if (currentVertex.getNumber_of_larvae() > 0)
+        {
             currentVertex.removeLarvae(1);
             collected_larvae += 1;
-            System.out.printf("%s, a %s ant collected a larvae\n", name, color);
+            System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " collected a larvae\n", name);
             currentVertex.semaphore.release();
-            if (collected_larvae >= strength) {
+            if (collected_larvae >= strength)
+            {
                 returnToAnthill();
             }
-        } else {
-            System.out.printf("%s, a %s ant found no larvae\n", name, color);
+        } else
+        {
+            //System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " found no larvae\n", name);
             currentVertex.semaphore.release();
         }
 
     }
 
     @Override
-    public void run() {
-        while (alive) {
-            try {
+    public void run()
+    {
+        while (alive)
+        {
+            try
+            {
                 randomMove();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            } catch (InterruptedException e)
+            {
+                break;
             }
-            try {
-                sleep(500);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            try
+            {
+                sleep(SLEEP_TIME);
+            } catch (InterruptedException e)
+            {
+                break;
             }
-            try {
+            try
+            {
                 collectLarvae();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            } catch (InterruptedException e)
+            {
+                break;
             }
-            try {
-                sleep(500);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            try
+            {
+                sleep(SLEEP_TIME);
+            } catch (InterruptedException e)
+            {
+                break;
             }
         }
     }

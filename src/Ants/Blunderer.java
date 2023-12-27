@@ -4,11 +4,14 @@ import AntWorld.Anthill;
 import AntWorld.Vertex;
 
 public class Blunderer extends Collector {
-    private int dropChance;
+    private static final double dropChance = 0.25;
 
-    public Blunderer(String name, int strength, int health, Anthill anthill, int dropChance) {
+    public Blunderer(String name, int strength, int health, Anthill anthill) {
         super(name, strength, health, anthill);
-        this.dropChance = dropChance;
+    }
+
+    public static double getDropChance() {
+        return dropChance;
     }
 
     @Override
@@ -22,13 +25,5 @@ public class Blunderer extends Collector {
         }
         assert currentVertex == anthill;
         storeLarvaeAsFood();
-    }
-
-    public int getDropChance() {
-        return dropChance;
-    }
-
-    public void setDropChance(int dropChance) {
-        this.dropChance = dropChance;
     }
 }

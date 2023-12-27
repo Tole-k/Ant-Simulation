@@ -5,7 +5,10 @@ import AntWorld.Vertex;
 
 import java.util.Stack;
 
-abstract public class Ant extends Thread implements Returning, Moving, Dying {
+abstract public class Ant extends Thread implements Returning, Moving, Dying
+{
+    protected static final int SLEEP_TIME = 50;
+    protected static final String ANSI_RESET = "\u001B[0m";
     protected String name;
     protected int strength;
     protected int health;
@@ -15,9 +18,9 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying {
     protected Anthill anthill;
     protected int collected_larvae;
     protected volatile boolean alive;
-    protected Vertex previous;
 
-    public Ant(String name, int strength, int health, String color, Anthill anthill) {
+    public Ant(String name, int strength, int health, String color, Anthill anthill)
+    {
         this.name = name;
         this.strength = strength;
         this.health = health;
@@ -30,22 +33,28 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying {
     }
 
     @Override
-    public void randomMove() throws InterruptedException {
+    public void randomMove() throws InterruptedException
+    {
         Vertex next = currentVertex.getNeighbors().get((int) (Math.random() * currentVertex.getNeighbors().size()));
-        path.push(currentVertex);
+        if (next != anthill)
+        {
+            path.push(currentVertex);
+        }
+        path.clear();
         move(next);
     }
 
     @Override
-    public void move(Vertex v) throws InterruptedException {
-        previous = currentVertex;
-        System.out.printf("%s, a %s ant is moving from %s to %s%n", name, color, currentVertex.getName(), v.getName());
+    public void move(Vertex v) throws InterruptedException
+    {
         currentVertex = v;
     }
 
     @Override
-    public void returnToAnthill() throws InterruptedException {
-        while (!path.empty()) {
+    public void returnToAnthill() throws InterruptedException
+    {
+        while (!path.empty())
+        {
             Vertex v = path.pop();
             move(v);
         }
@@ -53,98 +62,113 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying {
         storeLarvaeAsFood();
     }
 
-    public void dropLarvae(int amount) {
+    public void dropLarvae(int amount)
+    {
         collected_larvae -= amount;
         currentVertex.setNumber_of_larvae(currentVertex.getNumber_of_larvae() + amount);
     }
 
     @Override
-    public void die() {
+    public void die()
+    {
         dropLarvae(collected_larvae);
-        System.out.printf("%s, a %s ant has died%n", name, color);
         alive = false;
-        if (this instanceof BlueAnt) {
-            currentVertex.removeBlueAnt((BlueAnt) this);
-        } else if (this instanceof RedAnt) {
-            currentVertex.removeRedAnt((RedAnt) this);
-        }
         this.interrupt();
     }
 
     @Override
-    public void receiveDamage(int damage) {
+    public void receiveDamage(int damage)
+    {
         health -= damage;
-        if (health <= 0) {
+        if (health <= 0)
+        {
             die();
         }
     }
 
-    public void storeLarvaeAsFood() {
+    public void storeLarvaeAsFood()
+    {
         anthill.addFood(collected_larvae);
         collected_larvae = 0;
     }
 
-    public String get_Name() {
+    public String get_Name()
+    {
         return name;
     }
 
-    public void set_Name(String name) {
+    public void set_Name(String name)
+    {
         this.name = name;
     }
 
-    public int getStrength() {
+    public int getStrength()
+    {
         return strength;
     }
 
-    public void setStrength(int strength) {
+    public void setStrength(int strength)
+    {
         this.strength = strength;
     }
 
-    public int getHealth() {
+    public int getHealth()
+    {
         return health;
     }
 
-    public void setHealth(int health) {
+    public void setHealth(int health)
+    {
         this.health = health;
     }
 
-    public String getColor() {
+    public String getColor()
+    {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(String color)
+    {
         this.color = color;
     }
 
-    public Stack<Vertex> getPath() {
+    public Stack<Vertex> getPath()
+    {
         return path;
     }
 
-    public void setPath(Stack<Vertex> path) {
+    public void setPath(Stack<Vertex> path)
+    {
         this.path = path;
     }
 
-    public Vertex getCurrentVertex() {
+    public Vertex getCurrentVertex()
+    {
         return currentVertex;
     }
 
-    public void setCurrentVertex(Vertex currentVertex) {
+    public void setCurrentVertex(Vertex currentVertex)
+    {
         this.currentVertex = currentVertex;
     }
 
-    public Anthill getAnthill() {
+    public Anthill getAnthill()
+    {
         return anthill;
     }
 
-    public void setAnthill(Anthill anthill) {
+    public void setAnthill(Anthill anthill)
+    {
         this.anthill = anthill;
     }
 
-    public int getCollected_larvae() {
+    public int getCollected_larvae()
+    {
         return collected_larvae;
     }
 
-    public void setCollected_larvae(int collected_larvae) {
+    public void setCollected_larvae(int collected_larvae)
+    {
         this.collected_larvae = collected_larvae;
     }
 }
