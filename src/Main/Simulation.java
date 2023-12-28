@@ -1,7 +1,6 @@
 package Main;
 
-import Ants.Ant;
-import GUI.Frame;
+import GUI.MainFrame;
 
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -12,7 +11,7 @@ public class Simulation
     public static int verbosity = 2;
     private final World world;
     private final AntPopulation antPopulation;
-    private final Frame frame;
+    private final MainFrame mainFrame;
     protected boolean ended = false;
 
 
@@ -29,19 +28,15 @@ public class Simulation
         System.out.print("Enter the number of blue ants: ");
         int blue_size = 10;// s.nextInt();
         antPopulation = AntPopulation.getInstance(red_size, blue_size);
-        frame = new Frame();
+        mainFrame = new MainFrame();
     }
 
-    public void run() throws InterruptedException
+    public void run() throws Exception
     {
-        for (Ant ant : antPopulation.getAnts())
-        {
-            ant.start();
-        }
-        frame.run();
-        //DeathmatchChecker DMCheck = new DeathmatchChecker(antPopulation, this);
+        mainFrame.run();
         DeadRemoval deadRemoval = new DeadRemoval(antPopulation);
         deadRemoval.start();
+        //DeathmatchChecker DMCheck = new DeathmatchChecker(antPopulation, this);
         /*LarvaeCollectChecker LCCheck = new LarvaeCollectChecker(this, (int) (world.getSize() * 1.5), world.getBlueAnthill(), world.getRedAnthill());
         LCCheck.start();
         DMCheck.start();

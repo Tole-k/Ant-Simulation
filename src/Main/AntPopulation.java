@@ -46,12 +46,14 @@ public class AntPopulation
             BlueAnt ant = antFactory.initBlueAnt();
             ants.add(ant);
             blue_ants.add(ant);
+            ant.start();
         }
         for (int i = 0; i < red_size; i++)
         {
             RedAnt ant = antFactory.initRedAnt();
             ants.add(ant);
             red_ants.add(ant);
+            ant.start();
         }
     }
 
@@ -75,6 +77,7 @@ public class AntPopulation
         ants.add(ant);
         blue_ants.add(ant);
         blue_size += 1;
+        ant.start();
     }
 
     public void AddRedAnt()
@@ -83,6 +86,7 @@ public class AntPopulation
         ants.add(ant);
         red_ants.add(ant);
         red_size += 1;
+        ant.start();
     }
 
     public void removeAnt(Ant ant)

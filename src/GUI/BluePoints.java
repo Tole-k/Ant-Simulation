@@ -14,14 +14,4 @@ public class BluePoints extends Points
         this.setForeground(Color.BLUE);
         this.blue = blue;
     }
-
-    @Override
-    public void run()
-    {
-        while (true)
-        {
-            updateScore(blue.getAmount_of_food());
-        }
-    }
-
 }

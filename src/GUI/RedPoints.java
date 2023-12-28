@@ -15,12 +15,4 @@ public class RedPoints extends Points
         this.red = red;
     }
 
-    @Override
-    public void run()
-    {
-        while (true)
-        {
-            updateScore(red.getAmount_of_food());
-        }
-    }
 }

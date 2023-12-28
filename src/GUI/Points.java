@@ -4,7 +4,7 @@ import Main.World;
 
 import javax.swing.*;
 
-abstract public class Points extends JLabel implements Runnable
+abstract public class Points extends JLabel
 {
     World world;
 

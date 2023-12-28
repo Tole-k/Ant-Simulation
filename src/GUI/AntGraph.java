@@ -21,7 +21,7 @@ public class AntGraph extends JPanel implements Runnable
 {
     World world;
     AntPopulation antPopulation;
-    Frame frame;
+    MainFrame mainFrame;
     private Map<Vertex, Pair> points;
     private Pair blue;
     private Pair red;
@@ -135,7 +135,7 @@ public class AntGraph extends JPanel implements Runnable
                     Graphics g = this.getGraphics();
                     update(g);
                 });
-                Thread.sleep(500); // pause for 500 milliseconds
+                Thread.sleep(500);
             }
         } catch (InterruptedException e)
         {
