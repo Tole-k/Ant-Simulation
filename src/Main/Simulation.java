@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class Simulation
 {
 
+    public static int verbosity = 2;
     private final World world;
     private final AntPopulation antPopulation;
     private final Frame frame;
@@ -21,7 +22,7 @@ public class Simulation
         System.out.print("Enter the number of vertices in the ant world: ");
         int size = 20;//s.nextInt();
         System.out.print("Enter the density of the ant world: ");
-        double density = 0.4;// s.nextDouble();
+        double density = 0.40;// s.nextDouble();
         world = World.getInstance(size, density);
         System.out.print("Enter the number of red ants: ");
         int red_size = 10;// s.nextInt();
@@ -39,8 +40,8 @@ public class Simulation
         }
         frame.run();
         //DeathmatchChecker DMCheck = new DeathmatchChecker(antPopulation, this);
-        //DeadRemoval deadRemoval = new DeadRemoval(antPopulation);
-        //deadRemoval.start();
+        DeadRemoval deadRemoval = new DeadRemoval(antPopulation);
+        deadRemoval.start();
         /*LarvaeCollectChecker LCCheck = new LarvaeCollectChecker(this, (int) (world.getSize() * 1.5), world.getBlueAnthill(), world.getRedAnthill());
         LCCheck.start();
         DMCheck.start();

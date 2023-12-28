@@ -64,6 +64,11 @@ public class AntPopulation
         return self;
     }
 
+    public static AntPopulation access()
+    {
+        return self;
+    }
+
     public void AddBlueAnt()
     {
         BlueAnt ant = antFactory.initBlueAnt();

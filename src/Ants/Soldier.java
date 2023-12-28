@@ -1,6 +1,7 @@
 package Ants;
 
 import AntWorld.Anthill;
+import Main.Simulation;
 
 public class Soldier extends RedAnt implements Fighting
 {
@@ -16,13 +17,15 @@ public class Soldier extends RedAnt implements Fighting
         BlueAnt enemy = currentVertex.lookForBlueEnemy();
         if (enemy != null)
         {
-            //System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " is attacking %s\n", name, enemy.get_Name());
+            if (Simulation.verbosity >= 2)
+                System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " is attacking %s\n", name, enemy.get_Name());
             enemy.receiveDamage(strength);
             currentVertex.semaphore.release();
             returnToAnthill();
         } else
         {
-            //System.out.printf(ANSI_COLOR + "%s " + ANSI_RESET + " found no enemy\n", name);
+            if (Simulation.verbosity >= 3)
+                System.out.printf(ANSI_COLOR + "%s " + ANSI_RESET + " found no enemy\n", name);
             currentVertex.semaphore.release();
         }
 

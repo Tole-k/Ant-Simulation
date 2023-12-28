@@ -16,6 +16,8 @@ public class VertexFactory
     private final Random random;
     private String name = null;
     private int number_of_larvae;
+    private double x;
+    private double y;
 
 
     private VertexFactory(ArrayList<String> names)
@@ -44,6 +46,8 @@ public class VertexFactory
         name = names.get(nameInd);
         names.remove(nameInd);
         number_of_larvae = random.nextInt(6);
+        x = Math.random();
+        y = Math.random();
     }
 
     public Vertex initVertex()
@@ -53,13 +57,13 @@ public class VertexFactory
         double type = Math.random();
         if (type < 0.2)
         {
-            v = new Leaf(name, number_of_larvae);
+            v = new Leaf(name, number_of_larvae, x, y);
         } else if (type < 0.5)
         {
-            v = new Stone(name, number_of_larvae);
+            v = new Stone(name, number_of_larvae, x, y);
         } else
         {
-            v = new Vertex(name, number_of_larvae);
+            v = new Vertex(name, number_of_larvae, x, y);
         }
         total_larvae += number_of_larvae;
         return v;

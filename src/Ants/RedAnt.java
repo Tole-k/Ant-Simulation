@@ -3,6 +3,7 @@ package Ants;
 import AntWorld.Anthill;
 import AntWorld.Stone;
 import AntWorld.Vertex;
+import Main.Simulation;
 
 abstract public class RedAnt extends Ant
 {
@@ -20,7 +21,8 @@ abstract public class RedAnt extends Ant
         currentVertex.semaphore.acquireUninterruptibly();
         currentVertex.removeRedAnt(this);
         currentVertex.semaphore.release();
-        //System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " is moving from %s to %s%n", name, currentVertex.getName(), v.getName());
+        if (Simulation.verbosity >= 3)
+            System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " is moving from %s to %s%n", name, currentVertex.getName(), v.getName());
         super.move(v);
         currentVertex.semaphore.acquireUninterruptibly();
         currentVertex.addRedAnt(this);
@@ -44,7 +46,7 @@ abstract public class RedAnt extends Ant
     {
         if (collected_larvae > 0)
         {
-            System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + "stored %d food in anthill\n", name, collected_larvae);
+            System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + "stored %d food in anthill. ", name, collected_larvae);
             super.storeLarvaeAsFood();
             System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " has %d food stored\n", anthill.getName(), anthill.getAmount_of_food());
         }

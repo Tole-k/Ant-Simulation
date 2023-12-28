@@ -25,8 +25,8 @@ public class World
     {
         this.size = size;
         this.density = density;
-        this.redAnthill = new Anthill("Red Anthill");
-        this.blueAnthill = new Anthill("Blue Anthill");
+        this.redAnthill = new Anthill("Red Anthill", 0.9, 0.1);
+        this.blueAnthill = new Anthill("Blue Anthill", 0.1, 0.9);
         world = new ArrayList<>();
         world.add(redAnthill);
         world.add(blueAnthill);
@@ -47,7 +47,7 @@ public class World
         {
             for (int j = i + 1; j < world.size(); j++)
             {
-                if (Math.random() < density)
+                if (Math.random() < density - world.get(i).getNeighbors().size() * 0.1)
                 {
                     world.get(i).addNeighbors(world.get(j));
                     world.get(j).addNeighbors(world.get(i));

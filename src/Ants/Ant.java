@@ -3,6 +3,7 @@ package Ants;
 import AntWorld.Anthill;
 import AntWorld.Vertex;
 
+import java.util.Random;
 import java.util.Stack;
 
 abstract public class Ant extends Thread implements Returning, Moving, Dying
@@ -18,6 +19,8 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying
     protected Anthill anthill;
     protected int collected_larvae;
     protected volatile boolean alive;
+    private int x;
+    private int y;
 
     public Ant(String name, int strength, int health, String color, Anthill anthill)
     {
@@ -30,6 +33,8 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying
         currentVertex = anthill;
         collected_larvae = 0;
         alive = true;
+        x = new Random().nextInt(20) + 20;
+        y = new Random().nextInt(20) + 20;
     }
 
     @Override
@@ -180,5 +185,25 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying
     public void setAlive(boolean alive)
     {
         this.alive = alive;
+    }
+
+    public int getX()
+    {
+        return x;
+    }
+
+    public void setX(int x)
+    {
+        this.x = x;
+    }
+
+    public int getY()
+    {
+        return y;
+    }
+
+    public void setY(int y)
+    {
+        this.y = y;
     }
 }

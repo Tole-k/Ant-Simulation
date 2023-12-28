@@ -1,6 +1,7 @@
 package Ants;
 
 import AntWorld.Anthill;
+import Main.Simulation;
 
 public class Worker extends BlueAnt implements Fighting, Collecting
 {
@@ -19,12 +20,14 @@ public class Worker extends BlueAnt implements Fighting, Collecting
             int amount = currentVertex.getNumber_of_larvae();
             currentVertex.removeLarvae(amount);
             collected_larvae += amount;
-            //System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " collected %d larvae\n", name, amount);
+            if (Simulation.verbosity >= 2)
+                System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " collected %d larvae\n", name, amount);
             currentVertex.semaphore.release();
             returnToAnthill();
         } else
         {
-            //System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " found no larvae\n", name);
+            if (Simulation.verbosity >= 3)
+                System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " found no larvae\n", name);
             currentVertex.semaphore.release();
         }
 
@@ -37,13 +40,15 @@ public class Worker extends BlueAnt implements Fighting, Collecting
         RedAnt enemy = currentVertex.lookForRedEnemy();
         if (enemy != null)
         {
-            //System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " is attacking %s\n", name, enemy.get_Name());
+            if (Simulation.verbosity >= 2)
+                System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " is attacking %s\n", name, enemy.get_Name());
             enemy.receiveDamage(strength);
             currentVertex.semaphore.release();
             returnToAnthill();
         } else
         {
-            //System.out.printf(ANSI_COLOR + "%s " + ANSI_RESET + " found no enemy\n", name);
+            if (Simulation.verbosity >= 3)
+                System.out.printf(ANSI_COLOR + "%s " + ANSI_RESET + " found no enemy\n", name);
             currentVertex.semaphore.release();
         }
 

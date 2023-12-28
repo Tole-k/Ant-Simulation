@@ -1,6 +1,7 @@
 package Ants;
 
 import AntWorld.Anthill;
+import Main.Simulation;
 
 public class Collector extends RedAnt implements Collecting
 {
@@ -19,7 +20,8 @@ public class Collector extends RedAnt implements Collecting
             int amount = currentVertex.getNumber_of_larvae();
             currentVertex.removeLarvae(amount);
             collected_larvae += amount;
-            //System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " collected %d larvae\n", name, amount);
+            if (Simulation.verbosity >= 2)
+                System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " collected %d larvae\n", name, amount);
             currentVertex.semaphore.release();
             if (collected_larvae >= strength)
             {
@@ -27,7 +29,8 @@ public class Collector extends RedAnt implements Collecting
             }
         } else
         {
-            //System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " found no larvae\n", name);
+            if (Simulation.verbosity >= 3)
+                System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " found no larvae\n", name);
             currentVertex.semaphore.release();
         }
 

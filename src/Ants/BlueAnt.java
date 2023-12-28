@@ -3,6 +3,7 @@ package Ants;
 import AntWorld.Anthill;
 import AntWorld.Stone;
 import AntWorld.Vertex;
+import Main.Simulation;
 
 abstract public class BlueAnt extends Ant
 {
@@ -20,7 +21,8 @@ abstract public class BlueAnt extends Ant
         currentVertex.semaphore.acquireUninterruptibly();
         currentVertex.removeBlueAnt(this);
         currentVertex.semaphore.release();
-        //System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " is moving from %s to %s%n", name, currentVertex.getName(), v.getName());
+        if (Simulation.verbosity >= 3)
+            System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " is moving from %s to %s%n", name, currentVertex.getName(), v.getName());
         super.move(v);
         currentVertex.semaphore.acquireUninterruptibly();
         currentVertex.addBlueAnt(this);
@@ -35,7 +37,8 @@ abstract public class BlueAnt extends Ant
     public void die()
     {
         currentVertex.removeBlueAnt(this);
-        System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " died\n", name);
+        if (Simulation.verbosity >= 1)
+            System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " died\n", name);
         super.die();
     }
 
@@ -44,9 +47,11 @@ abstract public class BlueAnt extends Ant
     {
         if (collected_larvae > 0)
         {
-            System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " stored %d food in anthill\n", name, collected_larvae);
+            if (Simulation.verbosity >= 1)
+                System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " stored %d food in anthill. ", name, collected_larvae);
             super.storeLarvaeAsFood();
-            System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " has %d food stored\n", anthill.getName(), anthill.getAmount_of_food());
+            if (Simulation.verbosity >= 1)
+                System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " has %d food stored\n", anthill.getName(), anthill.getAmount_of_food());
         }
     }
 }

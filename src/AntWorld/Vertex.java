@@ -3,26 +3,32 @@ package AntWorld;
 import Ants.BlueAnt;
 import Ants.RedAnt;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
 
 public class Vertex
 {
+    private final double prep_x;
+    private final double prep_y;
     public volatile Semaphore semaphore = new Semaphore(1);
     protected int number_of_larvae;
     protected ArrayList<RedAnt> redAnts;
     protected ArrayList<BlueAnt> blueAnts;
     protected ArrayList<Vertex> neighbors;
-
     protected String name;
+    private int x = -1;
+    private int y = -1;
 
-    public Vertex(String name, int number_of_larvae)
+    public Vertex(String name, int number_of_larvae, double prep_x, double prep_y)
     {
         this.name = name;
         this.number_of_larvae = number_of_larvae;
         this.neighbors = new ArrayList<>();
         this.redAnts = new ArrayList<>();
         this.blueAnts = new ArrayList<>();
+        this.prep_x = prep_x;
+        this.prep_y = prep_y;
     }
 
     public RedAnt lookForRedEnemy()
@@ -42,6 +48,18 @@ public class Vertex
             return null;
         }
         return blueAnts.getFirst();
+    }
+
+    public int calculate_x(JPanel panel)
+    {
+        x = (int) (prep_x * panel.getWidth());
+        return x;
+    }
+
+    public int calculate_y(JPanel panel)
+    {
+        y = (int) (prep_y * panel.getHeight());
+        return y;
     }
 
     public int getNumber_of_larvae()
@@ -117,5 +135,35 @@ public class Vertex
     public void setName(String name)
     {
         this.name = name;
+    }
+
+    public double getPrep_x()
+    {
+        return prep_x;
+    }
+
+    public double getPrep_y()
+    {
+        return prep_y;
+    }
+
+    public int getX()
+    {
+        return x;
+    }
+
+    public void setX(int x)
+    {
+        this.x = x;
+    }
+
+    public int getY()
+    {
+        return y;
+    }
+
+    public void setY(int y)
+    {
+        this.y = y;
     }
 }

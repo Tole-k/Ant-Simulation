@@ -20,7 +20,7 @@ public class Frame extends JFrame
         setSize(1280, 720);
         getContentPane().setBackground(Color.BLACK);
         world = World.access();
-        graph = new AntGraph(this);
+        graph = new AntGraph();
         rp = new RedPoints(world.getRedAnthill());
         bp = new BluePoints(world.getBlueAnthill());
         JLabel sep = new JLabel(" : ");
@@ -42,5 +42,6 @@ public class Frame extends JFrame
     {
         new Thread(bp).start();
         new Thread(rp).start();
+        new Thread(graph).start();
     }
 }
