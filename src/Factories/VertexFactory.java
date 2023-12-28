@@ -43,7 +43,7 @@ public class VertexFactory
         int nameInd = random.nextInt(names.size());
         name = names.get(nameInd);
         names.remove(nameInd);
-        number_of_larvae = 1;//random.nextInt(0);
+        number_of_larvae = random.nextInt(6);
     }
 
     public Vertex initVertex()

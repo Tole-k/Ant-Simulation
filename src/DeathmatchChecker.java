@@ -1,10 +1,12 @@
 public class DeathmatchChecker extends Thread
 {
     AntPopulation antPopulation;
+    Simulation simulation;
 
-    public DeathmatchChecker(AntPopulation antPopulation)
+    public DeathmatchChecker(AntPopulation antPopulation, Simulation simulation)
     {
         this.antPopulation = antPopulation;
+        this.simulation = simulation;
     }
 
     @Override
@@ -16,14 +18,17 @@ public class DeathmatchChecker extends Thread
             if (antPopulation.getRed_ants().isEmpty())
             {
                 System.out.println("BLUE WIN");
+                antPopulation.ant_semaphore.release();
                 break;
             }
             if (antPopulation.getBlue_ants().isEmpty())
             {
                 System.out.println("RED WIN");
+                antPopulation.ant_semaphore.release();
                 break;
             }
             antPopulation.ant_semaphore.release();
         }
+        simulation.ended = true;
     }
 }

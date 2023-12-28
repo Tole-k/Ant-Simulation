@@ -16,9 +16,10 @@ public class Collector extends RedAnt implements Collecting
         currentVertex.semaphore.acquire();
         if (currentVertex.getNumber_of_larvae() > 0)
         {
-            currentVertex.removeLarvae(1);
-            collected_larvae += 1;
-            System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " collected a larvae\n", name);
+            int amount = currentVertex.getNumber_of_larvae();
+            currentVertex.removeLarvae(amount);
+            collected_larvae += amount;
+            //System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " collected %d larvae\n", name, amount);
             currentVertex.semaphore.release();
             if (collected_larvae >= strength)
             {

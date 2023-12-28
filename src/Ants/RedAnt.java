@@ -38,4 +38,15 @@ abstract public class RedAnt extends Ant
         System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " died\n", name);
         super.die();
     }
+
+    @Override
+    public void storeLarvaeAsFood()
+    {
+        if (collected_larvae > 0)
+        {
+            System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + "stored %d food in anthill\n", name, collected_larvae);
+            super.storeLarvaeAsFood();
+            System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " has %d food stored\n", anthill.getName(), anthill.getAmount_of_food());
+        }
+    }
 }

@@ -171,4 +171,14 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying
     {
         this.collected_larvae = collected_larvae;
     }
+
+    public boolean getAlive()
+    {
+        return alive;
+    }
+
+    public void setAlive(boolean alive)
+    {
+        this.alive = alive;
+    }
 }

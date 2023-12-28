@@ -8,6 +8,7 @@ public class Simulation
 
     private final World world;
     private final AntPopulation antPopulation;
+    protected boolean ended = false;
 
     public Simulation() throws FileNotFoundException
     {
@@ -30,11 +31,27 @@ public class Simulation
         {
             ant.start();
         }
-        DeathmatchChecker DMCheck = new DeathmatchChecker(antPopulation);
+        DeathmatchChecker DMCheck = new DeathmatchChecker(antPopulation, this);
         DeadRemoval deadRemoval = new DeadRemoval(antPopulation);
-        LarvaeCollectChecker LCCheck = new LarvaeCollectChecker(world, world.getBlueAnthill(), world.getRedAnthill());
+        LarvaeCollectChecker LCCheck = new LarvaeCollectChecker(world, this, (int) (world.getSize() * 1.5), world.getBlueAnthill(), world.getRedAnthill());
         LCCheck.start();
         deadRemoval.start();
         DMCheck.start();
+        while (true)
+        {
+            if (ended)
+            {
+                break;
+            }
+        }
+        antPopulation.ant_semaphore.acquireUninterruptibly();
+        for (Ant ant : antPopulation.getAnts())
+        {
+            ant.interrupt();
+        }
+        LCCheck.interrupt();
+        deadRemoval.interrupt();
+        DMCheck.interrupt();
+        antPopulation.ant_semaphore.release();
     }
 }
