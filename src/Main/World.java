@@ -1,3 +1,5 @@
+package Main;
+
 import AntWorld.Anthill;
 import AntWorld.Vertex;
 import Factories.VertexFactory;

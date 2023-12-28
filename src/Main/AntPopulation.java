@@ -1,3 +1,5 @@
+package Main;
+
 import Ants.Ant;
 import Ants.BlueAnt;
 import Ants.RedAnt;

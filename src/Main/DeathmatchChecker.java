@@ -1,3 +1,5 @@
+package Main;
+
 public class DeathmatchChecker extends Thread
 {
     AntPopulation antPopulation;

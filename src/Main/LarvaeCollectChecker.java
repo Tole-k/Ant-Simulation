@@ -1,3 +1,5 @@
+package Main;
+
 import AntWorld.Anthill;
 
 public class LarvaeCollectChecker extends Thread
@@ -9,9 +11,9 @@ public class LarvaeCollectChecker extends Thread
 
     int LarvaeGoal;
 
-    public LarvaeCollectChecker(World world, Simulation simulation, int LarvaeGoal, Anthill blue, Anthill red)
+    public LarvaeCollectChecker(Simulation simulation, int LarvaeGoal, Anthill blue, Anthill red)
     {
-        this.world = world;
+        this.world = World.access();
         this.LarvaeGoal = LarvaeGoal;
         this.blue = blue;
         this.red = red;

@@ -7,7 +7,7 @@ import java.util.Stack;
 
 abstract public class Ant extends Thread implements Returning, Moving, Dying
 {
-    protected static final int SLEEP_TIME = 50;
+    protected static final int SLEEP_TIME = 500;
     protected static final String ANSI_RESET = "\u001B[0m";
     protected String name;
     protected int strength;
