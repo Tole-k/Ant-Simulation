@@ -17,14 +17,11 @@ import java.util.Map;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
-public class AntGraph extends JPanel implements Runnable
+public class AntGraph extends JPanel
 {
     World world;
     AntPopulation antPopulation;
-    MainFrame mainFrame;
     private Map<Vertex, Pair> points;
-    private Pair blue;
-    private Pair red;
     private Image offScreenImage;
     private Graphics offScreenGraphics;
 
@@ -40,8 +37,8 @@ public class AntGraph extends JPanel implements Runnable
         super.paintComponent(g);
         setBackground(Color.BLACK);
         points = new HashMap<>();
-        blue = new Pair(50, getHeight() - 100);
-        red = new Pair(getWidth() - 100, 50);
+        Pair blue = new Pair(50, getHeight() - 100);
+        Pair red = new Pair(getWidth() - 100, 50);
         for (Vertex v : world.getWorld())
         {
             int x;
@@ -95,8 +92,7 @@ public class AntGraph extends JPanel implements Runnable
         }
     }
 
-    @Override
-    public void update(Graphics g)
+    public void updateAnt(Graphics g)
     {
         if (offScreenImage == null)
         {
@@ -123,23 +119,23 @@ public class AntGraph extends JPanel implements Runnable
         g.drawImage(offScreenImage, 0, 0, this);
     }
 
-    @Override
-    public void run()
+    public void updateLarvae(Graphics g)
     {
-        try
+        if (offScreenImage == null)
         {
-            while (true)
-            {
-                SwingUtilities.invokeLater(() ->
-                {
-                    Graphics g = this.getGraphics();
-                    update(g);
-                });
-                Thread.sleep(500);
-            }
-        } catch (InterruptedException e)
-        {
-            throw new RuntimeException(e);
+            offScreenImage = createImage(this.getWidth(), this.getHeight());
+            offScreenGraphics = offScreenImage.getGraphics();
         }
+
+        paintComponent(offScreenGraphics);
+
+        for (Vertex v : World.access().getWorld())
+        {
+            offScreenGraphics.setColor(Color.ORANGE);
+            if (v.getNumber_of_larvae() > 0)
+                offScreenGraphics.drawString(String.valueOf(v.getNumber_of_larvae()), points.get(v).x + 40, points.get(v).y + 40);
+        }
+
+        g.drawImage(offScreenImage, 0, 0, this);
     }
 }

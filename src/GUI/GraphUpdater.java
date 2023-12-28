@@ -17,7 +17,8 @@ public class GraphUpdater extends Updater
         while (!isCancelled())
         {
             Graphics g = antGraph.getGraphics();
-            antGraph.update(g);
+            antGraph.updateAnt(g);
+            antGraph.updateLarvae(g);
             Thread.sleep(500);
         }
         return null;
