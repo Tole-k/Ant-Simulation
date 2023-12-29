@@ -1,0 +1,340 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class AddAntButton {
+  + AddAntButton(boolean): 
+  - antPopulation: AntPopulation
+   antPopulation: AntPopulation
+}
+class Ant {
+  + Ant(String, int, int, String, Anthill): 
+  # health: int
+  # color: String
+  # collected_larvae: int
+  - x: int
+  # currentVertex: Vertex
+  # strength: int
+  # path: Stack<Vertex>
+  - y: int
+  # anthill: Anthill
+  # alive: boolean
+  + die(): void
+  + dropLarvae(int): void
+  + receiveDamage(int): void
+  + randomMove(): void
+  + returnToAnthill(): void
+  + move(Vertex): void
+  + storeLarvaeAsFood(): void
+   currentVertex: Vertex
+   collected_larvae: int
+   strength: int
+   color: String
+   _Name: String
+   y: int
+   x: int
+   health: int
+   anthill: Anthill
+   alive: boolean
+   path: Stack<Vertex>
+}
+class AntFactory {
+  - AntFactory(ArrayList<String>, Anthill, Anthill): 
+  + getInstance(ArrayList<String>, Anthill, Anthill): AntFactory
+  - chooseRandomStats(): void
+  + initRedAnt(): RedAnt
+  + initBlueAnt(): BlueAnt
+}
+class AntGraph {
+  + AntGraph(): 
+  - antPopulation: AntPopulation
+  - world: World
+  + paintComponent(Graphics): void
+  + updateGraph(Graphics): void
+   world: World
+   antPopulation: AntPopulation
+}
+class AntPopulation {
+  - AntPopulation(int, int): 
+  - red_size: int
+  - names: ArrayList<String>
+  - blue_ants: ArrayList<BlueAnt>
+  - antFactory: AntFactory
+  - world: World
+  - ants: ArrayList<Ant>
+  - blue_size: int
+  - red_ants: ArrayList<RedAnt>
+  - ant_semaphore: Semaphore
+  + AddBlueAnt(): void
+  + removeAnt(Ant): void
+  + access(): AntPopulation
+  + start(): void
+  + getInstance(int, int): AntPopulation
+  + AddRedAnt(): void
+   world: World
+   red_size: int
+   ants: ArrayList<Ant>
+   names: ArrayList<String>
+   ant_semaphore: Semaphore
+   blue_size: int
+   antFactory: AntFactory
+   blue_ants: ArrayList<BlueAnt>
+   size: int
+   red_ants: ArrayList<RedAnt>
+}
+class Anthill {
+  + Anthill(String, double, double): 
+  - amount_of_food: int
+  + addFood(int): void
+  + removeFood(int): void
+   amount_of_food: int
+}
+class BlueAnt {
+  + BlueAnt(String, int, int, Anthill): 
+  + storeLarvaeAsFood(): void
+  + die(): void
+  + move(Vertex): void
+}
+class BluePoints {
+  + BluePoints(Anthill): 
+  - blue: Anthill
+   blue: Anthill
+}
+class Blunderer {
+  + Blunderer(String, int, int, Anthill): 
+  - dropChance: double
+  + returnToAnthill(): void
+   dropChance: double
+}
+interface Collecting << interface >> {
+  + collectLarvae(): void
+}
+class Collector {
+  + Collector(String, int, int, Anthill): 
+  + run(): void
+  + collectLarvae(): void
+}
+class DeadRemoval {
+  + DeadRemoval(AntPopulation): 
+  - antPopulation: AntPopulation
+  + run(): void
+   antPopulation: AntPopulation
+}
+class Drone {
+  + Drone(String, int, int, Anthill): 
+  + run(): void
+}
+interface Dying << interface >> {
+  + receiveDamage(int): void
+  + die(): void
+}
+interface Fighting << interface >> {
+  + attack(): void
+}
+class GraphUpdater {
+  + GraphUpdater(AntGraph): 
+  # doInBackground(): Void
+}
+class InfoPanel {
+  + InfoPanel(): 
+  + updateInfo(): void
+}
+class InfoUpdater {
+  + InfoUpdater(InfoPanel): 
+  # doInBackground(): Void
+}
+class Leaf {
+  + Leaf(String, int, double, double): 
+  + lookForRedEnemy(): RedAnt
+  + lookForBlueEnemy(): BlueAnt
+}
+class Main {
+  + Main(): 
+  + main(String[]): void
+}
+class MainFrame {
+  + MainFrame(): 
+  + run(): void
+}
+interface Moving << interface >> {
+  + randomMove(): void
+  + move(Vertex): void
+  + returnToAnthill(): void
+}
+class Pair {
+  + Pair(int, int): 
+  - x: int
+  - y: int
+   y: int
+   x: int
+}
+class Points {
+  + Points(): 
+  # world: World
+  # updateScore(int): void
+   world: World
+}
+class RedAnt {
+  + RedAnt(String, int, int, Anthill): 
+  + die(): void
+  + move(Vertex): void
+  + storeLarvaeAsFood(): void
+}
+class RedPoints {
+  + RedPoints(Anthill): 
+  - red: Anthill
+   red: Anthill
+}
+interface Returning << interface >> {
+  + returnToAnthill(): void
+}
+class ScorePanel {
+  + ScorePanel(RedPoints, BluePoints): 
+  + updateScore(): void
+}
+class ScoreUpdater {
+  + ScoreUpdater(ScorePanel): 
+  # doInBackground(): Void
+}
+class Simulation {
+  + Simulation(): 
+  + run(): void
+}
+class Soldier {
+  + Soldier(String, int, int, Anthill): 
+  + attack(): void
+  + run(): void
+}
+class Stone {
+  + Stone(String, int, double, double): 
+}
+class Updater {
+  + Updater(): 
+}
+class Vertex {
+  + Vertex(String, int, double, double): 
+  - prep_y: double
+  # semaphore: Semaphore
+  - x: int
+  # name: String
+  # redAnts: ArrayList<RedAnt>
+  - prep_x: double
+  # blueAnts: ArrayList<BlueAnt>
+  # number_of_larvae: int
+  - y: int
+  # neighbors: ArrayList<Vertex>
+  + lookForRedEnemy(): RedAnt
+  + addLarvae(int): void
+  + removeLarvae(int): void
+  + addNeighbors(Vertex): void
+  + removeRedAnt(RedAnt): void
+  + lookForBlueEnemy(): BlueAnt
+  + calculate_x(JPanel): void
+  + calculate_y(JPanel): void
+  + addRedAnt(RedAnt): void
+  + addBlueAnt(BlueAnt): void
+  + removeBlueAnt(BlueAnt): void
+   name: String
+   semaphore: Semaphore
+   prep_y: double
+   y: int
+   x: int
+   neighbors: ArrayList<Vertex>
+   blueAnts: ArrayList<BlueAnt>
+   prep_x: double
+   number_of_larvae: int
+   redAnts: ArrayList<RedAnt>
+}
+class VertexFactory {
+  - VertexFactory(ArrayList<String>): 
+  - total_larvae: int
+  + initVertex(): Vertex
+  - chooseRandomStats(): void
+  + getInstance(ArrayList<String>, Anthill, Anthill): VertexFactory
+   total_larvae: int
+}
+class Worker {
+  + Worker(String, int, int, Anthill): 
+  + collectLarvae(): void
+  + attack(): void
+  + run(): void
+}
+class World {
+  - World(int, double): 
+  - total_larvae: int
+  - blueAnthill: Anthill
+  - places: ArrayList<String>
+  - redAnthill: Anthill
+  - world: ArrayList<Vertex>
+  - density: double
+  - size: int
+  + init(int, double): void
+  + access(): World
+  + addVertex(): void
+   redAnthill: Anthill
+   places: ArrayList<String>
+   world: ArrayList<Vertex>
+   density: double
+   size: int
+   total_larvae: int
+   blueAnthill: Anthill
+}
+
+AddAntButton  "1" *-[#595959,plain]-> "antPopulation\n1" AntPopulation 
+Ant           "1" *-[#595959,plain]-> "anthill\n1" Anthill       
+Ant            -[#008200,dashed]-^  Dying         
+Ant            -[#008200,dashed]-^  Moving        
+Ant            -[#008200,dashed]-^  Returning     
+Ant           "1" *-[#595959,plain]-> "currentVertex\n1" Vertex        
+AntFactory    "1" *-[#595959,plain]-> "red\n1" Anthill       
+AntGraph      "1" *-[#595959,plain]-> "antPopulation\n1" AntPopulation 
+AntGraph      "1" *-[#595959,plain]-> "points\n*" Pair          
+AntGraph      "1" *-[#595959,plain]-> "points\n*" Vertex        
+AntGraph      "1" *-[#595959,plain]-> "world\n1" World         
+AntPopulation "1" *-[#595959,plain]-> "ants\n*" Ant           
+AntPopulation "1" *-[#595959,plain]-> "antFactory\n1" AntFactory    
+AntPopulation "1" *-[#595959,plain]-> "blue_ants\n*" BlueAnt       
+AntPopulation "1" *-[#595959,plain]-> "red_ants\n*" RedAnt        
+AntPopulation "1" *-[#595959,plain]-> "world\n1" World         
+Anthill        -[#000082,plain]-^  Vertex        
+BlueAnt        -[#000082,plain]-^  Ant           
+BluePoints    "1" *-[#595959,plain]-> "blue\n1" Anthill       
+BluePoints     -[#000082,plain]-^  Points        
+Blunderer      -[#000082,plain]-^  Collector     
+Collector      -[#008200,dashed]-^  Collecting    
+Collector      -[#000082,plain]-^  RedAnt        
+DeadRemoval   "1" *-[#595959,plain]-> "antPopulation\n1" AntPopulation 
+Drone          -[#000082,plain]-^  BlueAnt       
+GraphUpdater  "1" *-[#595959,plain]-> "antGraph\n1" AntGraph      
+GraphUpdater   -[#000082,plain]-^  Updater       
+InfoPanel     "1" *-[#595959,plain]-> "antPopulation\n1" AntPopulation 
+InfoUpdater   "1" *-[#595959,plain]-> "infoPanel\n1" InfoPanel     
+InfoUpdater    -[#000082,plain]-^  Updater       
+Leaf           -[#000082,plain]-^  Vertex        
+MainFrame     "1" *-[#595959,plain]-> "graphUpdater\n1" GraphUpdater  
+MainFrame     "1" *-[#595959,plain]-> "infoUpdater\n1" InfoUpdater   
+MainFrame     "1" *-[#595959,plain]-> "scoreUpdater\n1" ScoreUpdater  
+Points        "1" *-[#595959,plain]-> "world\n1" World         
+RedAnt         -[#000082,plain]-^  Ant           
+RedPoints     "1" *-[#595959,plain]-> "red\n1" Anthill       
+RedPoints      -[#000082,plain]-^  Points        
+ScorePanel    "1" *-[#595959,plain]-> "bluePoints\n1" BluePoints    
+ScorePanel    "1" *-[#595959,plain]-> "redPoints\n1" RedPoints     
+ScoreUpdater  "1" *-[#595959,plain]-> "scorePanel\n1" ScorePanel    
+ScoreUpdater   -[#000082,plain]-^  Updater       
+Simulation    "1" *-[#595959,plain]-> "antPopulation\n1" AntPopulation 
+Simulation    "1" *-[#595959,plain]-> "mainFrame\n1" MainFrame     
+Soldier        -[#008200,dashed]-^  Fighting      
+Soldier        -[#000082,plain]-^  RedAnt        
+Stone          -[#000082,plain]-^  Vertex        
+Vertex        "1" *-[#595959,plain]-> "blueAnts\n*" BlueAnt       
+Vertex        "1" *-[#595959,plain]-> "redAnts\n*" RedAnt        
+Worker         -[#000082,plain]-^  BlueAnt       
+Worker         -[#008200,dashed]-^  Collecting    
+Worker         -[#008200,dashed]-^  Fighting      
+World         "1" *-[#595959,plain]-> "redAnthill\n1" Anthill       
+World         "1" *-[#595959,plain]-> "world\n*" Vertex        
+World         "1" *-[#595959,plain]-> "vertexFactory\n1" VertexFactory 
+@enduml
