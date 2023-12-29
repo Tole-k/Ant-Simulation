@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class RedPoints extends Points
 {
-    Anthill red;
+    private Anthill red;
 
     public RedPoints(Anthill red)
     {
@@ -15,4 +15,13 @@ public class RedPoints extends Points
         this.red = red;
     }
 
+    public Anthill getRed()
+    {
+        return red;
+    }
+
+    public void setRed(Anthill red)
+    {
+        this.red = red;
+    }
 }

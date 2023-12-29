@@ -18,7 +18,7 @@ public class World
     private final ArrayList<String> places;
     private final VertexFactory vertexFactory;
     private final ArrayList<Vertex> world;
-    protected int total_larvae;
+    private int total_larvae;
     private int size;
 
     private World(int size, double density) throws FileNotFoundException
@@ -31,7 +31,7 @@ public class World
         world.add(redAnthill);
         world.add(blueAnthill);
         places = new ArrayList<>();
-        Scanner s = new Scanner(new File("src/places.txt"));
+        Scanner s = new Scanner(new File("src/resources/places.txt"));
         while (s.hasNextLine())
         {
             places.add(s.nextLine());
@@ -115,5 +115,15 @@ public class World
     public ArrayList<String> getPlaces()
     {
         return places;
+    }
+
+    public int getTotal_larvae()
+    {
+        return total_larvae;
+    }
+
+    public void setTotal_larvae(int total_larvae)
+    {
+        this.total_larvae = total_larvae;
     }
 }

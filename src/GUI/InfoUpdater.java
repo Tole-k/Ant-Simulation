@@ -1,5 +1,7 @@
 package GUI;
 
+import Main.Simulation;
+
 public class InfoUpdater extends Updater
 {
     private final InfoPanel infoPanel;
@@ -16,7 +18,7 @@ public class InfoUpdater extends Updater
         while (!isCancelled())
         {
             infoPanel.updateInfo();
-            Thread.sleep(500);
+            Thread.sleep(Simulation.SLEEP_TIME);
         }
         return null;
     }

@@ -2,7 +2,7 @@ package Main;
 
 public class DeadRemoval extends Thread
 {
-    AntPopulation antPopulation;
+    private AntPopulation antPopulation;
 
     public DeadRemoval(AntPopulation antPopulation)
     {
@@ -14,7 +14,7 @@ public class DeadRemoval extends Thread
     {
         while (true)
         {
-            antPopulation.ant_semaphore.acquireUninterruptibly();
+            antPopulation.getAnt_semaphore().acquireUninterruptibly();
             for (int i = 0; i < antPopulation.getAnts().size(); i++)
             {
                 if (antPopulation.getAnts().get(i).isInterrupted())
@@ -23,7 +23,17 @@ public class DeadRemoval extends Thread
                     i -= 1;
                 }
             }
-            antPopulation.ant_semaphore.release();
+            antPopulation.getAnt_semaphore().release();
         }
+    }
+
+    public AntPopulation getAntPopulation()
+    {
+        return antPopulation;
+    }
+
+    public void setAntPopulation(AntPopulation antPopulation)
+    {
+        this.antPopulation = antPopulation;
     }
 }

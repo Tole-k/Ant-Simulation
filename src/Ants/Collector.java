@@ -14,24 +14,24 @@ public class Collector extends RedAnt implements Collecting
     @Override
     public void collectLarvae() throws InterruptedException
     {
-        currentVertex.semaphore.acquire();
+        currentVertex.getSemaphore().acquire();
         if (currentVertex.getNumber_of_larvae() > 0)
         {
             int amount = currentVertex.getNumber_of_larvae();
             currentVertex.removeLarvae(amount);
             collected_larvae += amount;
-            if (Simulation.verbosity >= 2)
+            if (Simulation.VERBOSITY >= 2)
                 System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " collected %d larvae\n", name, amount);
-            currentVertex.semaphore.release();
+            currentVertex.getSemaphore().release();
             if (collected_larvae >= strength)
             {
                 returnToAnthill();
             }
         } else
         {
-            if (Simulation.verbosity >= 3)
+            if (Simulation.VERBOSITY >= 3)
                 System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " found no larvae\n", name);
-            currentVertex.semaphore.release();
+            currentVertex.getSemaphore().release();
         }
 
     }
@@ -50,7 +50,7 @@ public class Collector extends RedAnt implements Collecting
             }
             try
             {
-                sleep(SLEEP_TIME);
+                sleep(Simulation.SLEEP_TIME);
             } catch (InterruptedException e)
             {
                 break;
@@ -64,7 +64,7 @@ public class Collector extends RedAnt implements Collecting
             }
             try
             {
-                sleep(SLEEP_TIME);
+                sleep(Simulation.SLEEP_TIME);
             } catch (InterruptedException e)
             {
                 break;

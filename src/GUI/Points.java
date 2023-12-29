@@ -6,7 +6,7 @@ import javax.swing.*;
 
 abstract public class Points extends JLabel
 {
-    World world;
+    protected World world;
 
     public Points()
     {
@@ -19,4 +19,13 @@ abstract public class Points extends JLabel
         this.setText(String.format("%d", points));
     }
 
+    public World getWorld()
+    {
+        return world;
+    }
+
+    public void setWorld(World world)
+    {
+        this.world = world;
+    }
 }

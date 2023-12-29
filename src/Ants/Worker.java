@@ -14,21 +14,21 @@ public class Worker extends BlueAnt implements Fighting, Collecting
     @Override
     public void collectLarvae() throws InterruptedException
     {
-        currentVertex.semaphore.acquire();
+        currentVertex.getSemaphore().acquire();
         if (currentVertex.getNumber_of_larvae() > 0)
         {
             int amount = currentVertex.getNumber_of_larvae();
             currentVertex.removeLarvae(amount);
             collected_larvae += amount;
-            if (Simulation.verbosity >= 2)
+            if (Simulation.VERBOSITY >= 2)
                 System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " collected %d larvae\n", name, amount);
-            currentVertex.semaphore.release();
+            currentVertex.getSemaphore().release();
             returnToAnthill();
         } else
         {
-            if (Simulation.verbosity >= 3)
+            if (Simulation.VERBOSITY >= 3)
                 System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " found no larvae\n", name);
-            currentVertex.semaphore.release();
+            currentVertex.getSemaphore().release();
         }
 
     }
@@ -36,20 +36,20 @@ public class Worker extends BlueAnt implements Fighting, Collecting
     @Override
     public void attack() throws InterruptedException
     {
-        currentVertex.semaphore.acquire();
+        currentVertex.getSemaphore().acquire();
         RedAnt enemy = currentVertex.lookForRedEnemy();
         if (enemy != null)
         {
-            if (Simulation.verbosity >= 2)
+            if (Simulation.VERBOSITY >= 2)
                 System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " is attacking %s\n", name, enemy.get_Name());
             enemy.receiveDamage(strength);
-            currentVertex.semaphore.release();
+            currentVertex.getSemaphore().release();
             returnToAnthill();
         } else
         {
-            if (Simulation.verbosity >= 3)
+            if (Simulation.VERBOSITY >= 3)
                 System.out.printf(ANSI_COLOR + "%s " + ANSI_RESET + " found no enemy\n", name);
-            currentVertex.semaphore.release();
+            currentVertex.getSemaphore().release();
         }
 
     }
@@ -68,7 +68,7 @@ public class Worker extends BlueAnt implements Fighting, Collecting
             }
             try
             {
-                sleep(SLEEP_TIME);
+                sleep(Simulation.SLEEP_TIME);
             } catch (InterruptedException e)
             {
                 break;
@@ -82,7 +82,7 @@ public class Worker extends BlueAnt implements Fighting, Collecting
             }
             try
             {
-                sleep(SLEEP_TIME);
+                sleep(Simulation.SLEEP_TIME);
             } catch (InterruptedException e)
             {
                 break;
@@ -96,7 +96,7 @@ public class Worker extends BlueAnt implements Fighting, Collecting
             }
             try
             {
-                sleep(SLEEP_TIME);
+                sleep(Simulation.SLEEP_TIME);
             } catch (InterruptedException e)
             {
                 break;

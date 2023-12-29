@@ -13,20 +13,20 @@ public class Soldier extends RedAnt implements Fighting
     @Override
     public void attack() throws InterruptedException
     {
-        currentVertex.semaphore.acquire();
+        currentVertex.getSemaphore().acquire();
         BlueAnt enemy = currentVertex.lookForBlueEnemy();
         if (enemy != null)
         {
-            if (Simulation.verbosity >= 2)
+            if (Simulation.VERBOSITY >= 2)
                 System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " is attacking %s\n", name, enemy.get_Name());
             enemy.receiveDamage(strength);
-            currentVertex.semaphore.release();
+            currentVertex.getSemaphore().release();
             returnToAnthill();
         } else
         {
-            if (Simulation.verbosity >= 3)
+            if (Simulation.VERBOSITY >= 3)
                 System.out.printf(ANSI_COLOR + "%s " + ANSI_RESET + " found no enemy\n", name);
-            currentVertex.semaphore.release();
+            currentVertex.getSemaphore().release();
         }
 
     }
@@ -46,7 +46,7 @@ public class Soldier extends RedAnt implements Fighting
             }
             try
             {
-                sleep(SLEEP_TIME);
+                sleep(Simulation.SLEEP_TIME);
             } catch (InterruptedException e)
             {
                 break;
@@ -60,7 +60,7 @@ public class Soldier extends RedAnt implements Fighting
             }
             try
             {
-                sleep(SLEEP_TIME);
+                sleep(Simulation.SLEEP_TIME);
             } catch (InterruptedException e)
             {
                 break;

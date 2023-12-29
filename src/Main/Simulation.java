@@ -10,7 +10,9 @@ import static java.lang.Thread.sleep;
 public class Simulation
 {
 
-    public static int verbosity = 2;
+    public static final int VERBOSITY = 3;
+    public static int SLEEP_TIME;
+    public static int TICK_RATE;
     private final AntPopulation antPopulation;
     private final MainFrame mainFrame;
 
@@ -20,13 +22,16 @@ public class Simulation
         Scanner s = new Scanner(System.in);
         System.out.print("Enter the number of vertices in the ant world: ");
         int size = s.nextInt();
-        System.out.print("Enter the density of the ant world: ");
-        double density = s.nextDouble();
+        //System.out.print("Enter the density of the ant world: ");
+        double density = 0.4; // s.nextDouble();
         World.getInstance(size, density);
         System.out.print("Enter the number of red ants: ");
         int red_size = s.nextInt();
         System.out.print("Enter the number of blue ants: ");
         int blue_size = s.nextInt();
+        //System.out.print("Enter the simulation tick rate: ");
+        TICK_RATE = 30; //s.nextInt();
+        SLEEP_TIME = 1000 / TICK_RATE;
         antPopulation = AntPopulation.getInstance(red_size, blue_size);
         mainFrame = new MainFrame();
     }

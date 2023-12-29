@@ -15,7 +15,7 @@ public class InfoPanel extends JPanel
     public InfoPanel()
     {
         antPopulation = AntPopulation.access();
-        model = new DefaultTableModel(antPopulation.getSize() + 1, 5);
+        model = new DefaultTableModel(antPopulation.getSize() + 1, 6);
         JTable infoTable = new JTable();
         infoTable.setModel(model);
         infoTable.setBackground(Color.BLACK);
@@ -27,13 +27,13 @@ public class InfoPanel extends JPanel
 
     public void updateInfo()
     {
-        antPopulation.ant_semaphore.acquireUninterruptibly();
+        antPopulation.getAnt_semaphore().acquireUninterruptibly();
         model.setRowCount(0);
-        model.addRow(new Object[]{"Name", "Color", "Strength", "Health", "Collected Larvae"});
+        model.addRow(new Object[]{"Name", "Color", "Class", "Strength", "Health", "Collected Larvae"});
         for (Ant ant : antPopulation.getAnts())
         {
-            model.addRow(new Object[]{ant.get_Name(), ant.getColor(), ant.getStrength(), ant.getHealth(), ant.getCollected_larvae()});
+            model.addRow(new Object[]{ant.get_Name(), ant.getColor(), ant.getClass().getName().substring(5), ant.getStrength(), ant.getHealth(), ant.getCollected_larvae()});
         }
-        antPopulation.ant_semaphore.release();
+        antPopulation.getAnt_semaphore().release();
     }
 }

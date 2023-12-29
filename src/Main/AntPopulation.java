@@ -20,7 +20,7 @@ public class AntPopulation
     private final ArrayList<String> names;
     private final AntFactory antFactory;
     private final World world;
-    public Semaphore ant_semaphore;
+    private Semaphore ant_semaphore;
     private int red_size;
     private int blue_size;
 
@@ -33,7 +33,7 @@ public class AntPopulation
         red_ants = new ArrayList<>();
         blue_ants = new ArrayList<>();
         names = new ArrayList<>();
-        Scanner s = new Scanner(new File("src/names.txt"));
+        Scanner s = new Scanner(new File("src/resources/names.txt"));
         while (s.hasNextLine())
         {
             names.add(s.nextLine());
@@ -152,5 +152,15 @@ public class AntPopulation
     public int getSize()
     {
         return red_size + blue_size;
+    }
+
+    public Semaphore getAnt_semaphore()
+    {
+        return ant_semaphore;
+    }
+
+    public void setAnt_semaphore(Semaphore ant_semaphore)
+    {
+        this.ant_semaphore = ant_semaphore;
     }
 }

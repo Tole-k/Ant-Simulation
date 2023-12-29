@@ -19,8 +19,8 @@ import static java.lang.Math.min;
 
 public class AntGraph extends JPanel
 {
-    World world;
-    AntPopulation antPopulation;
+    private World world;
+    private AntPopulation antPopulation;
     private Map<Vertex, Pair> points;
     private Image offScreenImage;
     private Graphics offScreenGraphics;
@@ -45,13 +45,13 @@ public class AntGraph extends JPanel
             int y;
             if (v == world.getBlueAnthill())
             {
-                x = blue.x;
-                y = blue.y;
+                x = blue.getX();
+                y = blue.getY();
                 g.setColor(Color.BLUE);
             } else if (v == world.getRedAnthill())
             {
-                x = red.x;
-                y = red.y;
+                x = red.getX();
+                y = red.getY();
                 g.setColor(Color.RED);
             } else
             {
@@ -78,8 +78,8 @@ public class AntGraph extends JPanel
             for (Map.Entry<Vertex, Pair> entry : points.entrySet())
             {
                 Vertex w = entry.getKey();
-                int xw = entry.getValue().x;
-                int yw = entry.getValue().y;
+                int xw = entry.getValue().getX();
+                int yw = entry.getValue().getY();
                 if (v.getNeighbors().contains(w))
                 {
                     g.drawLine(x + 20, y + 20, xw + 20, yw + 20);
@@ -101,8 +101,8 @@ public class AntGraph extends JPanel
         for (Ant ant : antPopulation.getAnts())
         {
             Pair pair = points.get(ant.getCurrentVertex());
-            int x = pair.x + ant.getX();
-            int y = pair.y + ant.getY();
+            int x = pair.getX() + ant.getX();
+            int y = pair.getY() + ant.getY();
             if (ant instanceof RedAnt)
                 offScreenGraphics.setColor(Color.RED);
             else
@@ -115,9 +115,29 @@ public class AntGraph extends JPanel
         {
             offScreenGraphics.setColor(Color.ORANGE);
             if (v.getNumber_of_larvae() > 0)
-                offScreenGraphics.drawString(String.valueOf(v.getNumber_of_larvae()), points.get(v).x + 40, points.get(v).y + 40);
+                offScreenGraphics.drawString(String.valueOf(v.getNumber_of_larvae()), points.get(v).getX() + 40, points.get(v).getY() + 40);
         }
 
         g.drawImage(offScreenImage, 0, 0, this);
+    }
+
+    public World getWorld()
+    {
+        return world;
+    }
+
+    public void setWorld(World world)
+    {
+        this.world = world;
+    }
+
+    public AntPopulation getAntPopulation()
+    {
+        return antPopulation;
+    }
+
+    public void setAntPopulation(AntPopulation antPopulation)
+    {
+        this.antPopulation = antPopulation;
     }
 }

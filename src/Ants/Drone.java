@@ -1,6 +1,7 @@
 package Ants;
 
 import AntWorld.Anthill;
+import Main.Simulation;
 
 public class Drone extends BlueAnt
 {
@@ -23,7 +24,7 @@ public class Drone extends BlueAnt
             }
             try
             {
-                sleep(SLEEP_TIME);
+                sleep(Simulation.SLEEP_TIME);
             } catch (InterruptedException e)
             {
                 break;

@@ -1,5 +1,7 @@
 package GUI;
 
+import Main.Simulation;
+
 public class ScoreUpdater extends Updater
 {
     private final ScorePanel scorePanel;
@@ -15,7 +17,7 @@ public class ScoreUpdater extends Updater
         while (!isCancelled())
         {
             scorePanel.updateScore();
-            Thread.sleep(500);
+            Thread.sleep(Simulation.SLEEP_TIME);
         }
         return null;
     }

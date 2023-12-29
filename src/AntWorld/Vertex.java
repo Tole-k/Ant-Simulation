@@ -11,7 +11,7 @@ public class Vertex
 {
     private final double prep_x;
     private final double prep_y;
-    public volatile Semaphore semaphore = new Semaphore(1);
+    protected volatile Semaphore semaphore = new Semaphore(1);
     protected int number_of_larvae;
     protected ArrayList<RedAnt> redAnts;
     protected ArrayList<BlueAnt> blueAnts;
@@ -163,5 +163,15 @@ public class Vertex
     public void setY(int y)
     {
         this.y = y;
+    }
+
+    public Semaphore getSemaphore()
+    {
+        return semaphore;
+    }
+
+    public void setSemaphore(Semaphore semaphore)
+    {
+        this.semaphore = semaphore;
     }
 }

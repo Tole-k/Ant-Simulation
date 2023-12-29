@@ -1,5 +1,7 @@
 package GUI;
 
+import Main.Simulation;
+
 import java.awt.*;
 
 public class GraphUpdater extends Updater
@@ -18,7 +20,7 @@ public class GraphUpdater extends Updater
         {
             Graphics g = antGraph.getGraphics();
             antGraph.updateGraph(g);
-            Thread.sleep(500);
+            Thread.sleep(Simulation.SLEEP_TIME);
         }
         return null;
     }

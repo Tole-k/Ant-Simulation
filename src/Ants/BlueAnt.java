@@ -18,18 +18,18 @@ abstract public class BlueAnt extends Ant
     @Override
     public void move(Vertex v) throws InterruptedException
     {
-        currentVertex.semaphore.acquireUninterruptibly();
+        currentVertex.getSemaphore().acquireUninterruptibly();
         currentVertex.removeBlueAnt(this);
-        currentVertex.semaphore.release();
-        if (Simulation.verbosity >= 3)
+        currentVertex.getSemaphore().release();
+        if (Simulation.VERBOSITY >= 3)
             System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " is moving from %s to %s%n", name, currentVertex.getName(), v.getName());
         super.move(v);
-        currentVertex.semaphore.acquireUninterruptibly();
+        currentVertex.getSemaphore().acquireUninterruptibly();
         currentVertex.addBlueAnt(this);
-        currentVertex.semaphore.release();
+        currentVertex.getSemaphore().release();
         if (currentVertex instanceof Stone)
         {
-            sleep(1000);
+            sleep(Simulation.SLEEP_TIME * 10L);
         }
     }
 
@@ -37,7 +37,7 @@ abstract public class BlueAnt extends Ant
     public void die()
     {
         currentVertex.removeBlueAnt(this);
-        if (Simulation.verbosity >= 1)
+        if (Simulation.VERBOSITY >= 1)
             System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " died\n", name);
         super.die();
     }
@@ -47,10 +47,10 @@ abstract public class BlueAnt extends Ant
     {
         if (collected_larvae > 0)
         {
-            if (Simulation.verbosity >= 1)
+            if (Simulation.VERBOSITY >= 1)
                 System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " stored %d food in anthill. ", name, collected_larvae);
             super.storeLarvaeAsFood();
-            if (Simulation.verbosity >= 1)
+            if (Simulation.VERBOSITY >= 1)
                 System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " has %d food stored\n", anthill.getName(), anthill.getAmount_of_food());
         }
     }

@@ -8,10 +8,6 @@ import java.awt.*;
 
 public class MainFrame extends JFrame
 {
-    private final World world;
-    private final RedPoints rp;
-    private final BluePoints bp;
-    private final AntGraph graph;
     private final InfoUpdater infoUpdater;
     private final ScoreUpdater scoreUpdater;
     private final GraphUpdater graphUpdater;
@@ -22,10 +18,10 @@ public class MainFrame extends JFrame
 
         setSize(1920, 1080);
         getContentPane().setBackground(Color.BLACK);
-        world = World.access();
-        graph = new AntGraph();
-        rp = new RedPoints(world.getRedAnthill());
-        bp = new BluePoints(world.getBlueAnthill());
+        World world = World.access();
+        AntGraph graph = new AntGraph();
+        RedPoints rp = new RedPoints(world.getRedAnthill());
+        BluePoints bp = new BluePoints(world.getBlueAnthill());
         JLabel sep = new JLabel(" : ");
         sep.setForeground(Color.WHITE);
         setLayout(new BorderLayout());
@@ -47,7 +43,7 @@ public class MainFrame extends JFrame
         setVisible(true);
     }
 
-    public void run() throws Exception
+    public void run()
     {
         infoUpdater.execute();
         scoreUpdater.execute();

@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class AddAntButton extends JButton
 {
-    AntPopulation antPopulation;
+    private AntPopulation antPopulation;
 
     public AddAntButton(boolean isRed)
     {
@@ -23,5 +23,15 @@ public class AddAntButton extends JButton
             setBackground(Color.BLUE);
             addActionListener(e -> antPopulation.AddBlueAnt());
         }
+    }
+
+    public AntPopulation getAntPopulation()
+    {
+        return antPopulation;
+    }
+
+    public void setAntPopulation(AntPopulation antPopulation)
+    {
+        this.antPopulation = antPopulation;
     }
 }
