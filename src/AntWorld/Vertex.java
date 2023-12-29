@@ -37,7 +37,7 @@ public class Vertex
         {
             return null;
         }
-        return redAnts.getFirst();
+        return redAnts.get(0);
 
     }
 
@@ -47,19 +47,17 @@ public class Vertex
         {
             return null;
         }
-        return blueAnts.getFirst();
+        return blueAnts.get(0);
     }
 
-    public int calculate_x(JPanel panel)
+    public void calculate_x(JPanel panel)
     {
         x = (int) (prep_x * panel.getWidth());
-        return x;
     }
 
-    public int calculate_y(JPanel panel)
+    public void calculate_y(JPanel panel)
     {
         y = (int) (prep_y * panel.getHeight());
-        return y;
     }
 
     public int getNumber_of_larvae()

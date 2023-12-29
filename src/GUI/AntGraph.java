@@ -61,10 +61,6 @@ public class AntGraph extends JPanel
                     v.calculate_y(this);
                 x = min(max(v.getX(), 50), getWidth() - 50);
                 y = min(max(v.getY(), 50), getHeight() - 50);
-                /*while (x < 100 && y > getHeight() - 200 || y < 100 && x > getWidth() - 200)
-                {
-                    y = min(max((int) (random() * getHeight()), 50), getHeight() - 50);
-                }*/
                 if (v instanceof Stone)
                     g.setColor(Color.GRAY);
                 else if (v instanceof Leaf)
@@ -92,7 +88,7 @@ public class AntGraph extends JPanel
         }
     }
 
-    public void updateAnt(Graphics g)
+    public void updateGraph(Graphics g)
     {
         if (offScreenImage == null)
         {
@@ -115,20 +111,6 @@ public class AntGraph extends JPanel
             offScreenGraphics.setColor(Color.BLACK);
             offScreenGraphics.drawRect(x - 3, y - 3, 6, 6);
         }
-
-        g.drawImage(offScreenImage, 0, 0, this);
-    }
-
-    public void updateLarvae(Graphics g)
-    {
-        if (offScreenImage == null)
-        {
-            offScreenImage = createImage(this.getWidth(), this.getHeight());
-            offScreenGraphics = offScreenImage.getGraphics();
-        }
-
-        paintComponent(offScreenGraphics);
-
         for (Vertex v : World.access().getWorld())
         {
             offScreenGraphics.setColor(Color.ORANGE);

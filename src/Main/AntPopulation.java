@@ -46,14 +46,12 @@ public class AntPopulation
             BlueAnt ant = antFactory.initBlueAnt();
             ants.add(ant);
             blue_ants.add(ant);
-            ant.start();
         }
         for (int i = 0; i < red_size; i++)
         {
             RedAnt ant = antFactory.initRedAnt();
             ants.add(ant);
             red_ants.add(ant);
-            ant.start();
         }
     }
 
@@ -99,6 +97,16 @@ public class AntPopulation
         {
             blue_ants.remove(ant);
         }
+    }
+
+    public void start() throws InterruptedException
+    {
+        ant_semaphore.acquire();
+        for (Ant ant : ants)
+        {
+            ant.start();
+        }
+        ant_semaphore.release();
     }
 
     public ArrayList<Ant> getAnts()
