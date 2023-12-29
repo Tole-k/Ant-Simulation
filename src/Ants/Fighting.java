@@ -1,5 +1,6 @@
 package Ants;
 
-public interface Fighting {
+public interface Fighting
+{
     void attack() throws InterruptedException;
 }

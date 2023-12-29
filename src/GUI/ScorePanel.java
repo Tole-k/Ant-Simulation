@@ -9,7 +9,6 @@ public class ScorePanel extends JPanel
 {
     private final RedPoints redPoints;
     private final BluePoints bluePoints;
-    private final JLabel separator;
 
     public ScorePanel(RedPoints redPoints, BluePoints bluePoints)
     {
@@ -17,7 +16,7 @@ public class ScorePanel extends JPanel
         this.redPoints = redPoints;
         this.bluePoints = bluePoints;
         setLayout(new FlowLayout());
-        separator = new JLabel(" : ");
+        JLabel separator = new JLabel(" : ");
         separator.setForeground(Color.WHITE);
         this.add(bluePoints);
         this.add(separator);

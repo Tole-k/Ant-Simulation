@@ -1,5 +1,6 @@
 package Ants;
 
-public interface Returning {
+public interface Returning
+{
     void returnToAnthill() throws InterruptedException;
 }

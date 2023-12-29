@@ -9,12 +9,12 @@ import java.util.concurrent.Semaphore;
 
 public class Vertex
 {
+    protected final ArrayList<RedAnt> redAnts;
+    protected final ArrayList<BlueAnt> blueAnts;
     private final double prep_x;
     private final double prep_y;
     protected volatile Semaphore semaphore = new Semaphore(1);
     protected int number_of_larvae;
-    protected ArrayList<RedAnt> redAnts;
-    protected ArrayList<BlueAnt> blueAnts;
     protected ArrayList<Vertex> neighbors;
     protected String name;
     private int x = -1;

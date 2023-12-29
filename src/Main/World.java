@@ -56,13 +56,12 @@ public class World
         }
     }
 
-    public static World getInstance(int size, double density) throws FileNotFoundException
+    public static void init(int size, double density) throws FileNotFoundException
     {
         if (self == null)
         {
             self = new World(size, density);
         }
-        return self;
     }
 
     public static World access()

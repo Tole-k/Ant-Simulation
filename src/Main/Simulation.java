@@ -24,7 +24,7 @@ public class Simulation
         int size = s.nextInt();
         //System.out.print("Enter the density of the ant world: ");
         double density = 0.4; // s.nextDouble();
-        World.getInstance(size, density);
+        World.init(size, density);
         System.out.print("Enter the number of red ants: ");
         int red_size = s.nextInt();
         System.out.print("Enter the number of blue ants: ");

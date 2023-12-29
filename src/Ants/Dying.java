@@ -1,6 +1,7 @@
 package Ants;
 
-public interface Dying {
+public interface Dying
+{
     void receiveDamage(int damage);
 
     void die();
