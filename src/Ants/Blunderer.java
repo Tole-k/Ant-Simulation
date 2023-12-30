@@ -28,9 +28,9 @@ public class Blunderer extends Collector
             move(v);
             if (Math.random() < dropChance)
             {
-                currentVertex.getSemaphore().acquire();
+                currentVertex.getBlueAttackReadLock().lock();
                 dropLarvae(1);
-                currentVertex.getSemaphore().release();
+                currentVertex.getBlueAttackReadLock().unlock();
             }
         }
         assert currentVertex == anthill;

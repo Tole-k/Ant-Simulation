@@ -71,14 +71,16 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying
         storeLarvaeAsFood();
     }
 
-    public void dropLarvae(int amount)
+    public void dropLarvae(int amount) throws InterruptedException
     {
+        currentVertex.getCollectSemaphore().acquire();
         collected_larvae -= amount;
         currentVertex.setNumber_of_larvae(currentVertex.getNumber_of_larvae() + amount);
+        currentVertex.getCollectSemaphore().release();
     }
 
     @Override
-    public void die()
+    public void die() throws InterruptedException
     {
         dropLarvae(collected_larvae);
         alive = false;
@@ -86,7 +88,7 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying
     }
 
     @Override
-    public void receiveDamage(int damage)
+    public void receiveDamage(int damage) throws InterruptedException
     {
         health -= damage;
         if (health <= 0)

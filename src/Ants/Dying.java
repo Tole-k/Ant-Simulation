@@ -2,7 +2,7 @@ package Ants;
 
 public interface Dying
 {
-    void receiveDamage(int damage);
+    void receiveDamage(int damage) throws InterruptedException;
 
-    void die();
+    void die() throws InterruptedException;
 }

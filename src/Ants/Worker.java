@@ -14,7 +14,8 @@ public class Worker extends BlueAnt implements Fighting, Collecting
     @Override
     public void collectLarvae() throws InterruptedException
     {
-        currentVertex.getSemaphore().acquire();
+        currentVertex.getRedAttackReadLock().lock();
+        currentVertex.getCollectSemaphore().acquire();
         if (currentVertex.getNumber_of_larvae() > 0)
         {
             int amount = currentVertex.getNumber_of_larvae();
@@ -22,14 +23,16 @@ public class Worker extends BlueAnt implements Fighting, Collecting
             collected_larvae += amount;
             if (Simulation.VERBOSITY >= 2)
                 System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " collected %d larvae\n", name, amount);
-            currentVertex.getSemaphore().release();
+            currentVertex.getCollectSemaphore().release();
+            currentVertex.getRedAttackReadLock().unlock();
             //System.out.println("Returning to anthill...");
             returnToAnthill();
         } else
         {
             if (Simulation.VERBOSITY >= 3)
                 System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " found no larvae\n", name);
-            currentVertex.getSemaphore().release();
+            currentVertex.getCollectSemaphore().release();
+            currentVertex.getRedAttackReadLock().unlock();
         }
 
     }
@@ -37,21 +40,24 @@ public class Worker extends BlueAnt implements Fighting, Collecting
     @Override
     public void attack() throws InterruptedException
     {
-        currentVertex.getSemaphore().acquire();
+        currentVertex.getRedAttackReadLock().lock();
+        currentVertex.getBlueAttackWriteLock().lock();
         RedAnt enemy = currentVertex.lookForRedEnemy();
         if (enemy != null)
         {
             if (Simulation.VERBOSITY >= 2)
                 System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " is attacking %s\n", name, enemy.get_Name());
             enemy.receiveDamage(strength);
-            currentVertex.getSemaphore().release();
+            currentVertex.getBlueAttackWriteLock().unlock();
+            currentVertex.getRedAttackReadLock().unlock();
             //System.out.println("Returning to anthill...");
             returnToAnthill();
         } else
         {
             if (Simulation.VERBOSITY >= 3)
                 System.out.printf(ANSI_COLOR + "%s " + ANSI_RESET + " found no enemy\n", name);
-            currentVertex.getSemaphore().release();
+            currentVertex.getBlueAttackWriteLock().unlock();
+            currentVertex.getRedAttackReadLock().unlock();
         }
 
     }

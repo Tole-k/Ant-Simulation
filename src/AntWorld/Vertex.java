@@ -6,14 +6,24 @@ import Ants.RedAnt;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class Vertex
 {
     protected final ArrayList<RedAnt> redAnts;
     protected final ArrayList<BlueAnt> blueAnts;
+    protected final ReadWriteLock redAttackLock = new ReentrantReadWriteLock();
+    protected final Lock redAttackReadLock = redAttackLock.readLock();
+    protected final Lock redAttackWriteLock = redAttackLock.writeLock();
+    protected final ReadWriteLock blueAttackLock = new ReentrantReadWriteLock();
+    protected final Lock blueAttackReadLock = blueAttackLock.readLock();
+    protected final Lock blueAttackWriteLock = blueAttackLock.writeLock();
+    protected final Semaphore semaphore = new Semaphore(1);
+    protected final Semaphore collectSemaphore = new Semaphore(1);
     private final double prep_x;
     private final double prep_y;
-    protected volatile Semaphore semaphore = new Semaphore(1);
     protected int number_of_larvae;
     protected ArrayList<Vertex> neighbors;
     protected String name;
@@ -170,8 +180,38 @@ public class Vertex
         return semaphore;
     }
 
-    public void setSemaphore(Semaphore semaphore)
+    public ReadWriteLock getRedAttackLock()
     {
-        this.semaphore = semaphore;
+        return redAttackLock;
+    }
+
+    public Lock getRedAttackReadLock()
+    {
+        return redAttackReadLock;
+    }
+
+    public Lock getRedAttackWriteLock()
+    {
+        return redAttackWriteLock;
+    }
+
+    public ReadWriteLock getBlueAttackLock()
+    {
+        return blueAttackLock;
+    }
+
+    public Lock getBlueAttackReadLock()
+    {
+        return blueAttackReadLock;
+    }
+
+    public Lock getBlueAttackWriteLock()
+    {
+        return blueAttackWriteLock;
+    }
+
+    public Semaphore getCollectSemaphore()
+    {
+        return collectSemaphore;
     }
 }

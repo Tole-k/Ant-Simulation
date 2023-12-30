@@ -13,20 +13,26 @@ public class Soldier extends RedAnt implements Fighting
     @Override
     public void attack() throws InterruptedException
     {
-        currentVertex.getSemaphore().acquire();
+        currentVertex.getRedAttackWriteLock().lock();
+        currentVertex.getBlueAttackReadLock().lock();
         BlueAnt enemy = currentVertex.lookForBlueEnemy();
         if (enemy != null)
         {
             if (Simulation.VERBOSITY >= 2)
                 System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " is attacking %s\n", name, enemy.get_Name());
             enemy.receiveDamage(strength);
-            currentVertex.getSemaphore().release();
+            currentVertex.getBlueAttackReadLock().unlock();
+            currentVertex.getRedAttackWriteLock().unlock();
+
             returnToAnthill();
         } else
         {
             if (Simulation.VERBOSITY >= 3)
                 System.out.printf(ANSI_COLOR + "%s " + ANSI_RESET + " found no enemy\n", name);
-            currentVertex.getSemaphore().release();
+            currentVertex.getBlueAttackReadLock().unlock();
+            currentVertex.getRedAttackWriteLock().unlock();
+
+
         }
 
     }

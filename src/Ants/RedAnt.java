@@ -18,15 +18,15 @@ abstract public class RedAnt extends Ant
     @Override
     public void move(Vertex v) throws InterruptedException
     {
-        currentVertex.getSemaphore().acquireUninterruptibly();
+        currentVertex.getBlueAttackReadLock().lock();
         currentVertex.removeRedAnt(this);
-        currentVertex.getSemaphore().release();
+        currentVertex.getBlueAttackReadLock().unlock();
         if (Simulation.VERBOSITY >= 3)
             System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " is moving from %s to %s%n", name, currentVertex.getName(), v.getName());
         super.move(v);
-        currentVertex.getSemaphore().acquireUninterruptibly();
+        currentVertex.getBlueAttackReadLock().lock();
         currentVertex.addRedAnt(this);
-        currentVertex.getSemaphore().release();
+        currentVertex.getBlueAttackReadLock().unlock();
         if (currentVertex instanceof Stone)
         {
             sleep(Simulation.SLEEP_TIME * 10L);
@@ -34,7 +34,7 @@ abstract public class RedAnt extends Ant
     }
 
     @Override
-    public void die()
+    public void die() throws InterruptedException
     {
         currentVertex.removeRedAnt(this);
         System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " died\n", name);
@@ -55,7 +55,7 @@ abstract public class RedAnt extends Ant
     }
 
     @Override
-    public void dropLarvae(int amount)
+    public void dropLarvae(int amount) throws InterruptedException
     {
         super.dropLarvae(amount);
         if (Simulation.VERBOSITY >= 0)
