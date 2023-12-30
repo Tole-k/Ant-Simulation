@@ -46,9 +46,19 @@ abstract public class RedAnt extends Ant
     {
         if (collected_larvae > 0)
         {
-            System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + "stored %d food in anthill. ", name, collected_larvae);
+            if (Simulation.VERBOSITY >= 1)
+                System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + "stored %d food in anthill. ", name, collected_larvae);
             super.storeLarvaeAsFood();
-            System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " has %d food stored\n", anthill.getName(), anthill.getAmount_of_food());
+            if (Simulation.VERBOSITY >= 1)
+                System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " has %d food stored\n", anthill.getName(), anthill.getAmount_of_food());
         }
+    }
+
+    @Override
+    public void dropLarvae(int amount)
+    {
+        super.dropLarvae(amount);
+        if (Simulation.VERBOSITY >= 0)
+            System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " dropped %d larvae\n", name, amount);
     }
 }

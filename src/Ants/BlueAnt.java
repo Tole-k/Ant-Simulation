@@ -54,4 +54,12 @@ abstract public class BlueAnt extends Ant
                 System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " has %d food stored\n", anthill.getName(), anthill.getAmount_of_food());
         }
     }
+
+    @Override
+    public void dropLarvae(int amount)
+    {
+        super.dropLarvae(amount);
+        if (Simulation.VERBOSITY >= 2)
+            System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " dropped %d larvae\n", name, amount);
+    }
 }

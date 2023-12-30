@@ -51,7 +51,7 @@ public class AntFactory
         int type = random.nextInt(2);
         ant = switch (type)
         {
-            case 0 -> new Drone(name, strength, health, blue);
+            case 0 -> new Drone(name, 0, health * 2, blue);
             case 1 -> new Worker(name, strength, health, blue);
             default -> null;
         };
@@ -65,9 +65,9 @@ public class AntFactory
         int type = random.nextInt(3);
         ant = switch (type)
         {
-            case 0 -> new Soldier(name, strength, health, red);
-            case 1 -> new Collector(name, strength, health, red);
-            case 2 -> new Blunderer(name, strength, health, red);
+            case 0 -> new Soldier(name, (int) (strength * 1.5), health, red);
+            case 1 -> new Collector(name, strength / 2, health, red);
+            case 2 -> new Blunderer(name, strength / 2, health, red);
             default -> null;
         };
         return ant;

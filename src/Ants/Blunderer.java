@@ -2,6 +2,7 @@ package Ants;
 
 import AntWorld.Anthill;
 import AntWorld.Vertex;
+import Main.Simulation;
 
 public class Blunderer extends Collector
 {
@@ -23,10 +24,13 @@ public class Blunderer extends Collector
         while (!path.empty())
         {
             Vertex v = path.pop();
+            sleep(Simulation.SLEEP_TIME);
             move(v);
             if (Math.random() < dropChance)
             {
+                currentVertex.getSemaphore().acquire();
                 dropLarvae(1);
+                currentVertex.getSemaphore().release();
             }
         }
         assert currentVertex == anthill;

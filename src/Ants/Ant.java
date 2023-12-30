@@ -2,6 +2,7 @@ package Ants;
 
 import AntWorld.Anthill;
 import AntWorld.Vertex;
+import Main.Simulation;
 
 import java.util.Random;
 import java.util.Stack;
@@ -43,8 +44,10 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying
         if (next != anthill)
         {
             path.push(currentVertex);
+        } else
+        {
+            path.clear();
         }
-        path.clear();
         move(next);
     }
 
@@ -60,6 +63,8 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying
         while (!path.empty())
         {
             Vertex v = path.pop();
+            //System.out.println("Returning to anthill...");
+            sleep(Simulation.SLEEP_TIME / 2);
             move(v);
         }
         assert currentVertex == anthill;

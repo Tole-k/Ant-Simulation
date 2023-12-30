@@ -23,6 +23,7 @@ public class Worker extends BlueAnt implements Fighting, Collecting
             if (Simulation.VERBOSITY >= 2)
                 System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " collected %d larvae\n", name, amount);
             currentVertex.getSemaphore().release();
+            //System.out.println("Returning to anthill...");
             returnToAnthill();
         } else
         {
@@ -44,6 +45,7 @@ public class Worker extends BlueAnt implements Fighting, Collecting
                 System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " is attacking %s\n", name, enemy.get_Name());
             enemy.receiveDamage(strength);
             currentVertex.getSemaphore().release();
+            //System.out.println("Returning to anthill...");
             returnToAnthill();
         } else
         {
