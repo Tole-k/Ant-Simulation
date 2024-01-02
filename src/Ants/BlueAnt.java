@@ -58,8 +58,11 @@ abstract public class BlueAnt extends Ant
     @Override
     public void dropLarvae(int amount)
     {
-        super.dropLarvae(amount);
-        if (Simulation.VERBOSITY >= 2)
-            System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " dropped %d larvae\n", name, amount);
+        if (amount > 0)
+        {
+            super.dropLarvae(amount);
+            if (Simulation.VERBOSITY >= 2)
+                System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " dropped %d larvae\n", name, amount);
+        }
     }
 }
