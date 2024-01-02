@@ -17,7 +17,8 @@ public class AntPopulation
     private final ArrayList<Ant> ants;
     private final ArrayList<BlueAnt> blue_ants;
     private final ArrayList<RedAnt> red_ants;
-    private final ArrayList<String> names;
+    private final ArrayList<String> democratic_names;
+    private final ArrayList<String> republican_names;
     private final AntFactory antFactory;
     private final World world;
     private Semaphore ant_semaphore;
@@ -32,15 +33,22 @@ public class AntPopulation
         ants = new ArrayList<>();
         red_ants = new ArrayList<>();
         blue_ants = new ArrayList<>();
-        names = new ArrayList<>();
-        Scanner s = new Scanner(new File("src/resources/names.txt"));
+        democratic_names = new ArrayList<>();
+        Scanner s = new Scanner(new File("src/resources/Democrats.txt"));
         while (s.hasNextLine())
         {
-            names.add(s.nextLine());
+            democratic_names.add(s.nextLine());
+        }
+        s.close();
+        republican_names = new ArrayList<>();
+        s = new Scanner(new File("src/resources/Republicans.txt"));
+        while (s.hasNextLine())
+        {
+            republican_names.add(s.nextLine());
         }
         s.close();
         world = World.access();
-        antFactory = AntFactory.getInstance(names, world.getBlueAnthill(), world.getRedAnthill());
+        antFactory = AntFactory.getInstance(democratic_names, republican_names, world.getBlueAnthill(), world.getRedAnthill());
         for (int i = 0; i < blue_size; i++)
         {
             BlueAnt ant = antFactory.initBlueAnt();
@@ -136,7 +144,7 @@ public class AntPopulation
 
     public ArrayList<String> getNames()
     {
-        return names;
+        return democratic_names;
     }
 
     public AntFactory getAntFactory()

@@ -31,7 +31,7 @@ public class World
         world.add(redAnthill);
         world.add(blueAnthill);
         places = new ArrayList<>();
-        Scanner s = new Scanner(new File("src/resources/places.txt"));
+        Scanner s = new Scanner(new File("src/resources/states.txt"));
         while (s.hasNextLine())
         {
             places.add(s.nextLine());

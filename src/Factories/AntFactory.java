@@ -9,7 +9,8 @@ import java.util.Random;
 public class AntFactory
 {
     private static AntFactory self = null;
-    private final ArrayList<String> names;
+    private final ArrayList<String> democratic_names;
+    private final ArrayList<String> republican_names;
     private final Anthill red;
     private final Anthill blue;
     private final Random random;
@@ -18,35 +19,45 @@ public class AntFactory
     private int health;
 
 
-    private AntFactory(ArrayList<String> names, Anthill blue, Anthill red)
+    private AntFactory(ArrayList<String> democratic_names, ArrayList<String> republican_names, Anthill blue, Anthill red)
     {
-        this.names = names;
+        this.republican_names = republican_names;
+        this.democratic_names = democratic_names;
         this.red = red;
         this.blue = blue;
         this.random = new Random();
     }
 
-    public static AntFactory getInstance(ArrayList<String> names, Anthill blue, Anthill red)
+    public static AntFactory getInstance(ArrayList<String> democratic_names, ArrayList<String> republican_names, Anthill blue, Anthill red)
     {
         if (self == null)
         {
-            self = new AntFactory(names, blue, red);
+            self = new AntFactory(democratic_names, republican_names, blue, red);
         }
         return self;
     }
 
-    private void chooseRandomStats()
+    private void chooseRandomStats(boolean democratic)
     {
-        int nameInd = random.nextInt(names.size());
-        name = names.get(nameInd);
-        names.remove(nameInd);
+        int nameInd;
+        if (democratic)
+        {
+            nameInd = random.nextInt(democratic_names.size());
+            name = democratic_names.get(nameInd);
+            democratic_names.remove(nameInd);
+        } else
+        {
+            nameInd = random.nextInt(republican_names.size());
+            name = republican_names.get(nameInd);
+            republican_names.remove(nameInd);
+        }
         strength = random.nextInt(10) + 10;
         health = random.nextInt(100) + 100;
     }
 
     public BlueAnt initBlueAnt()
     {
-        chooseRandomStats();
+        chooseRandomStats(true);
         BlueAnt ant;
         int type = random.nextInt(2);
         ant = switch (type)
@@ -60,7 +71,7 @@ public class AntFactory
 
     public RedAnt initRedAnt()
     {
-        chooseRandomStats();
+        chooseRandomStats(false);
         RedAnt ant;
         int type = random.nextInt(3);
         ant = switch (type)
