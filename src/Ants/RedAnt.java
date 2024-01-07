@@ -5,16 +5,39 @@ import AntWorld.Stone;
 import AntWorld.Vertex;
 import Main.Simulation;
 
+/**
+ * Abstract RedAnt class extends Ant.
+ * This class represents a red ant in the simulation.
+ */
 abstract public class RedAnt extends Ant
 {
+    /**
+     * ANSI color code for red.
+     */
     protected static final String ANSI_COLOR = "\u001B[31m";
 
+    /**
+     * Constructor for the RedAnt class.
+     *
+     * @param name     Name of the red ant.
+     * @param strength Strength of the red ant.
+     * @param health   Health of the red ant.
+     * @param anthill  Anthill the red ant belongs to.
+     */
     public RedAnt(String name, int strength, int health, Anthill anthill)
     {
         super(name, strength, health, "red", anthill);
         currentVertex.addRedAnt(this);
     }
 
+    /**
+     * Method to move the ant to a new vertex.
+     * The ant removes itself from the current vertex, moves to the new vertex, and adds itself to the new vertex.
+     * If the new vertex is a stone, the ant sleeps for a longer time.
+     *
+     * @param v The new vertex to move to.
+     * @throws InterruptedException if the thread is interrupted.
+     */
     @Override
     public void move(Vertex v) throws InterruptedException
     {
@@ -33,6 +56,10 @@ abstract public class RedAnt extends Ant
         }
     }
 
+    /**
+     * Method to kill the ant.
+     * The ant removes itself from the current vertex and dies.
+     */
     @Override
     public void die()
     {
@@ -42,6 +69,10 @@ abstract public class RedAnt extends Ant
         super.die();
     }
 
+    /**
+     * Method to store collected larvae as food.
+     * If the ant has collected any larvae, it stores them as food.
+     */
     @Override
     public void storeLarvaeAsFood()
     {
@@ -55,6 +86,12 @@ abstract public class RedAnt extends Ant
         }
     }
 
+    /**
+     * Method to drop larvae.
+     * If the ant has any larvae, it drops them.
+     *
+     * @param amount The amount of larvae to drop.
+     */
     @Override
     public void dropLarvae(int amount)
     {

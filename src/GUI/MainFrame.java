@@ -5,13 +5,24 @@ import Main.World;
 import javax.swing.*;
 import java.awt.*;
 
-
+/**
+ * The MainFrame class extends the JFrame class and represents the main frame of the GUI.
+ * It includes methods for setting up the frame and running the simulation.
+ */
 public class MainFrame extends JFrame
 {
+    // The info updater for the info panel
     private final InfoUpdater infoUpdater;
+    // The score updater for the score panel
     private final ScoreUpdater scoreUpdater;
+    // The graph updater for the ant graph
     private final GraphUpdater graphUpdater;
 
+    /**
+     * Constructor for the MainFrame class.
+     * It initializes the main frame with the given title and sets up the GUI components.
+     * @param title The title of the main frame.
+     */
     public MainFrame(String title)
     {
         super(title);
@@ -43,6 +54,10 @@ public class MainFrame extends JFrame
         setVisible(true);
     }
 
+    /**
+     * This method starts the simulation.
+     * It executes the info updater, score updater, and graph updater.
+     */
     public void run()
     {
         infoUpdater.execute();

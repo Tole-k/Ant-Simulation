@@ -10,20 +10,36 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.Semaphore;
-
+/**
+ * The AntPopulation class manages the population of ants in the simulation.
+ * It includes methods for adding and removing ants, starting the simulation, and accessing population properties.
+ */
 public class AntPopulation
 {
+    // Singleton instance of the AntPopulation class
     private static AntPopulation self = null;
+    // Lists of ants in the population
     private final ArrayList<Ant> ants;
     private final ArrayList<BlueAnt> blue_ants;
     private final ArrayList<RedAnt> red_ants;
+    // List of democratic names for the ants
     private final ArrayList<String> democratic_names;
+    // Factory for creating new ants
     private final AntFactory antFactory;
+    // The world in which the ants live
     private final World world;
+    // Semaphore for controlling access to the ant population
     private Semaphore ant_semaphore;
+    // Sizes of the red and blue ant populations
     private int red_size;
     private int blue_size;
-
+    /**
+     * Constructor for the AntPopulation class.
+     * It initializes the ant population based on the given sizes of the red and blue ant populations.
+     * @param red_size The size of the red ant population.
+     * @param blue_size The size of the blue ant population.
+     * @throws FileNotFoundException if the required files are not found.
+     */
     private AntPopulation(int red_size, int blue_size) throws FileNotFoundException
     {
         this.red_size = red_size;
@@ -68,7 +84,14 @@ public class AntPopulation
             red_ants.add(ant);
         }
     }
-
+    /**
+     * This method provides access to the AntPopulation instance.
+     * It is a static method that creates a new instance of the AntPopulation class if it does not exist.
+     * @param red_size The size of the red ant population.
+     * @param blue_size The size of the blue ant population.
+     * @return The AntPopulation instance.
+     * @throws FileNotFoundException if the required files are not found.
+     */
     public static AntPopulation getInstance(int red_size, int blue_size) throws FileNotFoundException
     {
         if (self == null)
@@ -77,12 +100,17 @@ public class AntPopulation
         }
         return self;
     }
-
+    /**
+     * This method provides access to the AntPopulation instance.
+     * @return The AntPopulation instance.
+     */
     public static AntPopulation access()
     {
         return self;
     }
-
+    /**
+     * This method adds a blue ant to the population.
+     */
     public void AddBlueAnt()
     {
         BlueAnt ant = antFactory.initBlueAnt();
@@ -91,7 +119,9 @@ public class AntPopulation
         blue_size += 1;
         ant.start();
     }
-
+    /**
+     * This method adds a red ant to the population.
+     */
     public void AddRedAnt()
     {
         RedAnt ant = antFactory.initRedAnt();
@@ -100,7 +130,10 @@ public class AntPopulation
         red_size += 1;
         ant.start();
     }
-
+    /**
+     * This method removes an ant from the population.
+     * @param ant The ant to be removed.
+     */
     public void removeAnt(Ant ant)
     {
         ants.remove(ant);
@@ -112,7 +145,11 @@ public class AntPopulation
             blue_ants.remove(ant);
         }
     }
-
+    /**
+     * This method starts the simulation.
+     * It starts all the ants in the population.
+     * @throws InterruptedException if an error occurs during the simulation.
+     */
     public void start() throws InterruptedException
     {
         ant_semaphore.acquire();

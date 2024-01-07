@@ -8,12 +8,23 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
+/**
+ * The InfoPanel class extends the JPanel class and represents the information panel in the GUI.
+ * It includes methods for updating the information panel.
+ */
 public class InfoPanel extends JPanel
 {
+    // The ant population whose information is to be displayed
     private final AntPopulation antPopulation;
+    // The table model for the information table
     private final DefaultTableModel model;
+    // The resource collected by the ants
     private final String resource;
 
+    /**
+     * Constructor for the InfoPanel class.
+     * It initializes the information panel and sets up the information table.
+     */
     public InfoPanel()
     {
         antPopulation = AntPopulation.access();
@@ -33,6 +44,10 @@ public class InfoPanel extends JPanel
             this.resource = "larvae";
     }
 
+    /**
+     * This method updates the information panel.
+     * It updates the information table with the current state of the ant population.
+     */
     public void updateInfo()
     {
         antPopulation.getAnt_semaphore().acquireUninterruptibly();

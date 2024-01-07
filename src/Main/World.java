@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-
+/**
+ * The World class represents the world in which the ants live.
+ * It includes methods for initializing the world, adding vertices, and accessing world properties.
+ */
 public class World
 {
     private static World self = null;
@@ -22,7 +25,13 @@ public class World
     private final ArrayList<Vertex> world;
     private int total_larvae;
     private int size;
-
+    /**
+     * Constructor for the World class.
+     * It initializes the world based on the given size and density.
+     * @param size The size of the world.
+     * @param density The density of the world.
+     * @throws FileNotFoundException if the required files are not found.
+     */
     private World(int size, double density) throws FileNotFoundException
     {
         this.size = size;
@@ -101,7 +110,13 @@ public class World
             v.addNeighbors(blueAnthill);
         }
     }
-
+    /**
+     * This method initializes the world.
+     * It is a static method that creates a new instance of the World class if it does not exist.
+     * @param size The size of the world.
+     * @param density The density of the world.
+     * @throws FileNotFoundException if the required files are not found.
+     */
     public static void init(int size, double density) throws FileNotFoundException
     {
         if (self == null)
@@ -109,13 +124,18 @@ public class World
             self = new World(size, density);
         }
     }
-
+    /**
+     * This method provides access to the World instance.
+     * @return The World instance.
+     */
     public static World access()
     {
         assert self != null;
         return self;
     }
-
+    /**
+     * This method adds a vertex to the world.
+     */
     public void addVertex()
     {
         Vertex v = vertexFactory.initVertex();
@@ -131,42 +151,66 @@ public class World
         total_larvae = VertexFactory.getTotal_larvae();
         size += 1;
     }
-
+    /**
+     * This method returns the red anthill.
+     * @return The red anthill.
+     */
     public Anthill getRedAnthill()
     {
         return redAnthill;
     }
-
+    /**
+     * This method returns the blue anthill.
+     * @return The blue anthill.
+     */
     public Anthill getBlueAnthill()
     {
         return blueAnthill;
     }
-
+    /**
+     * This method returns the size of the world.
+     * @return The size of the world.
+     */
     public int getSize()
     {
         return size;
     }
-
+    /**
+     * This method returns the density of the world.
+     * @return The density of the world.
+     */
     public double getDensity()
     {
         return density;
     }
-
+    /**
+     * This method returns the world.
+     * @return The world.
+     */
     public ArrayList<Vertex> getWorld()
     {
         return world;
     }
-
+    /**
+     * This method returns the places in the world.
+     * @return The places in the world.
+     */
     public ArrayList<String> getPlaces()
     {
         return states;
     }
-
+    /**
+     * This method returns the total number of larvae in the world.
+     * @return The total number of larvae.
+     */
     public int getTotal_larvae()
     {
         return total_larvae;
     }
-
+    /**
+     * This method sets the total number of larvae in the world.
+     * @param total_larvae The total number of larvae.
+     */
     public void setTotal_larvae(int total_larvae)
     {
         this.total_larvae = total_larvae;

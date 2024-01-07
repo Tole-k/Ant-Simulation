@@ -5,16 +5,34 @@ import AntWorld.Stone;
 import AntWorld.Vertex;
 import Main.Simulation;
 
+/**
+ * This abstract class represents a BlueAnt, which is a type of Ant.
+ * It includes methods for moving, dying, storing larvae as food, and dropping larvae.
+ */
 abstract public class BlueAnt extends Ant
 {
     protected static final String ANSI_COLOR = "\u001B[34m";
 
+    /**
+     * Constructor for the BlueAnt class.
+     *
+     * @param name     The name of the ant.
+     * @param strength The strength of the ant.
+     * @param health   The health of the ant.
+     * @param anthill  The anthill the ant belongs to.
+     */
     public BlueAnt(String name, int strength, int health, Anthill anthill)
     {
         super(name, strength, health, "blue", anthill);
         currentVertex.addBlueAnt(this);
     }
 
+    /**
+     * This method is used to move the ant to a new vertex.
+     *
+     * @param v The vertex to move to.
+     * @throws InterruptedException If the thread is interrupted.
+     */
     @Override
     public void move(Vertex v) throws InterruptedException
     {
@@ -33,6 +51,9 @@ abstract public class BlueAnt extends Ant
         }
     }
 
+    /**
+     * This method is used when the ant dies.
+     */
     @Override
     public void die()
     {
@@ -42,6 +63,9 @@ abstract public class BlueAnt extends Ant
         super.die();
     }
 
+    /**
+     * This method is used to store larvae as food.
+     */
     @Override
     public void storeLarvaeAsFood()
     {
@@ -55,6 +79,11 @@ abstract public class BlueAnt extends Ant
         }
     }
 
+    /**
+     * This method is used to drop a certain amount of larvae.
+     *
+     * @param amount The amount of larvae to drop.
+     */
     @Override
     public void dropLarvae(int amount)
     {

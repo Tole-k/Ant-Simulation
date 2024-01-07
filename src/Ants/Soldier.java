@@ -3,13 +3,31 @@ package Ants;
 import AntWorld.Anthill;
 import Main.Simulation;
 
+/**
+ * Soldier class extends RedAnt and implements Fighting interface.
+ * This class represents a soldier ant in the simulation.
+ */
 public class Soldier extends RedAnt implements Fighting
 {
+    /**
+     * Constructor for the Soldier class.
+     *
+     * @param name     Name of the soldier ant.
+     * @param strength Strength of the soldier ant.
+     * @param health   Health of the soldier ant.
+     * @param anthill  Anthill the soldier ant belongs to.
+     */
     public Soldier(String name, int strength, int health, Anthill anthill)
     {
         super(name, strength, health, anthill);
     }
 
+    /**
+     * Method to attack.
+     * The soldier ant attacks a blue ant enemy if there is one in the current vertex.
+     *
+     * @throws InterruptedException if the thread is interrupted.
+     */
     @Override
     public void attack() throws InterruptedException
     {
@@ -31,7 +49,10 @@ public class Soldier extends RedAnt implements Fighting
 
     }
 
-
+    /**
+     * Run method for the soldier ant.
+     * The soldier ant moves randomly, sleeps, attacks, and sleeps again in a loop while it is alive.
+     */
     @Override
     public void run()
     {
