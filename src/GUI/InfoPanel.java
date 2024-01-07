@@ -29,7 +29,7 @@ public class InfoPanel extends JPanel
     {
         antPopulation = AntPopulation.access();
         antPopulation.getAnt_semaphore().acquireUninterruptibly();
-        model = new DefaultTableModel(antPopulation.getSize() + 1, 6);
+        model = new DefaultTableModel(0, 6);
         JTable infoTable = new JTable();
         infoTable.setModel(model);
         infoTable.getColumnModel().getColumn(0).setMinWidth(150);
