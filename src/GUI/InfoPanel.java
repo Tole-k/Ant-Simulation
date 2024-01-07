@@ -28,6 +28,7 @@ public class InfoPanel extends JPanel
     public InfoPanel()
     {
         antPopulation = AntPopulation.access();
+        antPopulation.getAnt_semaphore().acquireUninterruptibly();
         model = new DefaultTableModel(antPopulation.getSize() + 1, 6);
         JTable infoTable = new JTable();
         infoTable.setModel(model);
@@ -42,6 +43,7 @@ public class InfoPanel extends JPanel
             this.resource = "dollars";
         else
             this.resource = "larvae";
+        antPopulation.getAnt_semaphore().release();
     }
 
     /**
