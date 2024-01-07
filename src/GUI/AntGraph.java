@@ -96,7 +96,7 @@ public class AntGraph extends JPanel
             g.drawString(v.getName(), x, y);
             g.setColor(Color.WHITE);
             Iterator<Map.Entry<Vertex, Pair>> it = points.entrySet().iterator();
-            while (it.hasNext())
+            /*while (it.hasNext())
             {
                 Map.Entry<Vertex, Pair> entry = it.next();
                 Vertex w = entry.getKey();
@@ -107,8 +107,8 @@ public class AntGraph extends JPanel
                 {
                     g.drawLine(x + 20, y + 20, xw + 20, yw + 20);
                 }
-            }
-            /*for (Map.Entry<Vertex, Pair> entry : points.entrySet())
+            }*/
+            for (Map.Entry<Vertex, Pair> entry : points.entrySet())
             {
                 Vertex w = entry.getKey();
                 int xw = entry.getValue().getX();
@@ -117,7 +117,7 @@ public class AntGraph extends JPanel
                 {
                     g.drawLine(x + 20, y + 20, xw + 20, yw + 20);
                 }
-            }*/
+            }
         }
     }
 
