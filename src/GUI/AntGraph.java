@@ -12,6 +12,7 @@ import Main.World;
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import static java.lang.Math.max;
@@ -94,7 +95,20 @@ public class AntGraph extends JPanel
             g.fillOval(x, y, 40, 40);
             g.drawString(v.getName(), x, y);
             g.setColor(Color.WHITE);
-            for (Map.Entry<Vertex, Pair> entry : points.entrySet())
+            Iterator<Map.Entry<Vertex, Pair>> it = points.entrySet().iterator();
+            while (it.hasNext())
+            {
+                Map.Entry<Vertex, Pair> entry = it.next();
+                Vertex w = entry.getKey();
+                Pair p = entry.getValue();
+                int xw = p.getX();
+                int yw = p.getY();
+                if (v.getNeighbors().contains(w))
+                {
+                    g.drawLine(x + 20, y + 20, xw + 20, yw + 20);
+                }
+            }
+            /*for (Map.Entry<Vertex, Pair> entry : points.entrySet())
             {
                 Vertex w = entry.getKey();
                 int xw = entry.getValue().getX();
@@ -103,7 +117,7 @@ public class AntGraph extends JPanel
                 {
                     g.drawLine(x + 20, y + 20, xw + 20, yw + 20);
                 }
-            }
+            }*/
         }
     }
 
