@@ -108,16 +108,6 @@ public class AntGraph extends JPanel
                     g.drawLine(x + 20, y + 20, xw + 20, yw + 20);
                 }
             }
-            /*for (Map.Entry<Vertex, Pair> entry : points.entrySet())
-            {
-                Vertex w = entry.getKey();
-                int xw = entry.getValue().getX();
-                int yw = entry.getValue().getY();
-                if (v.getNeighbors().contains(w))
-                {
-                    g.drawLine(x + 20, y + 20, xw + 20, yw + 20);
-                }
-            }*/
         }
     }
 
