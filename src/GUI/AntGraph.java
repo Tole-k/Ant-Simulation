@@ -101,7 +101,7 @@ public class AntGraph extends JPanel
                 int yw = entry.getValue().getY();
                 if (v.getNeighbors().contains(w))
                 {
-                    //g.drawLine(x + 20, y + 20, xw + 20, yw + 20);
+                    g.drawLine(x + 20, y + 20, xw + 20, yw + 20);
                 }
             }
         }
