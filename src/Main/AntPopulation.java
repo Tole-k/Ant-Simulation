@@ -5,11 +5,12 @@ import Ants.BlueAnt;
 import Ants.RedAnt;
 import Factories.AntFactory;
 
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.Semaphore;
+
 /**
  * The AntPopulation class manages the population of ants in the simulation.
  * It includes methods for adding and removing ants, starting the simulation, and accessing population properties.
@@ -33,14 +34,15 @@ public class AntPopulation
     // Sizes of the red and blue ant populations
     private int red_size;
     private int blue_size;
+
     /**
      * Constructor for the AntPopulation class.
      * It initializes the ant population based on the given sizes of the red and blue ant populations.
-     * @param red_size The size of the red ant population.
+     *
+     * @param red_size  The size of the red ant population.
      * @param blue_size The size of the blue ant population.
-     * @throws FileNotFoundException if the required files are not found.
      */
-    private AntPopulation(int red_size, int blue_size) throws FileNotFoundException
+    private AntPopulation(int red_size, int blue_size)
     {
         this.red_size = red_size;
         this.blue_size = blue_size;
@@ -49,21 +51,27 @@ public class AntPopulation
         red_ants = new ArrayList<>();
         blue_ants = new ArrayList<>();
         democratic_names = new ArrayList<>();
-        Scanner s = new Scanner(new File("src/resources/Democrats.txt"));
+        InputStream inputStream = getClass().getResourceAsStream("/resources/Democrats.txt");
+        assert inputStream != null;
+        Scanner s = new Scanner(inputStream);
         while (s.hasNextLine())
         {
             democratic_names.add(s.nextLine());
         }
         s.close();
         ArrayList<String> republican_names = new ArrayList<>();
-        s = new Scanner(new File("src/resources/Republicans.txt"));
+        inputStream = getClass().getResourceAsStream("/resources/Republicans.txt");
+        assert inputStream != null;
+        s = new Scanner(inputStream);
         while (s.hasNextLine())
         {
             republican_names.add(s.nextLine());
         }
         s.close();
         ArrayList<String> fantasy_names = new ArrayList<>();
-        s = new Scanner(new File("src/resources/names.txt"));
+        inputStream = getClass().getResourceAsStream("/resources/names.txt");
+        assert inputStream != null;
+        s = new Scanner(inputStream);
         while (s.hasNextLine())
         {
             fantasy_names.add(s.nextLine());
@@ -84,10 +92,12 @@ public class AntPopulation
             red_ants.add(ant);
         }
     }
+
     /**
      * This method provides access to the AntPopulation instance.
      * It is a static method that creates a new instance of the AntPopulation class if it does not exist.
-     * @param red_size The size of the red ant population.
+     *
+     * @param red_size  The size of the red ant population.
      * @param blue_size The size of the blue ant population.
      * @return The AntPopulation instance.
      * @throws FileNotFoundException if the required files are not found.
@@ -100,14 +110,17 @@ public class AntPopulation
         }
         return self;
     }
+
     /**
      * This method provides access to the AntPopulation instance.
+     *
      * @return The AntPopulation instance.
      */
     public static AntPopulation access()
     {
         return self;
     }
+
     /**
      * This method adds a blue ant to the population.
      */
@@ -119,6 +132,7 @@ public class AntPopulation
         blue_size += 1;
         ant.start();
     }
+
     /**
      * This method adds a red ant to the population.
      */
@@ -130,8 +144,10 @@ public class AntPopulation
         red_size += 1;
         ant.start();
     }
+
     /**
      * This method removes an ant from the population.
+     *
      * @param ant The ant to be removed.
      */
     public void removeAnt(Ant ant)
@@ -145,9 +161,11 @@ public class AntPopulation
             blue_ants.remove(ant);
         }
     }
+
     /**
      * This method starts the simulation.
      * It starts all the ants in the population.
+     *
      * @throws InterruptedException if an error occurs during the simulation.
      */
     public void start() throws InterruptedException
