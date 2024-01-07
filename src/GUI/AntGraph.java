@@ -11,9 +11,9 @@ import Main.World;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -56,7 +56,7 @@ public class AntGraph extends JPanel
     {
         super.paintComponent(g);
         setBackground(Color.BLACK);
-        points = new HashMap<>();
+        points = new ConcurrentHashMap<>();
         Pair blue = new Pair(50, getHeight() - 100);
         Pair red = new Pair(getWidth() - 100, 50);
         for (Vertex v : world.getWorld())
