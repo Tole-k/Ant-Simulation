@@ -2,6 +2,7 @@ package Factories;
 
 import AntWorld.Anthill;
 import Ants.*;
+import Main.Simulation;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,13 +15,15 @@ public class AntFactory
     private final Anthill red;
     private final Anthill blue;
     private final Random random;
+    private final ArrayList<String> fantasy_names;
     private String name = null;
     private int strength;
     private int health;
 
 
-    private AntFactory(ArrayList<String> democratic_names, ArrayList<String> republican_names, Anthill blue, Anthill red)
+    private AntFactory(ArrayList<String> fantasy_names, ArrayList<String> democratic_names, ArrayList<String> republican_names, Anthill blue, Anthill red)
     {
+        this.fantasy_names = fantasy_names;
         this.republican_names = republican_names;
         this.democratic_names = democratic_names;
         this.red = red;
@@ -28,11 +31,11 @@ public class AntFactory
         this.random = new Random();
     }
 
-    public static AntFactory getInstance(ArrayList<String> democratic_names, ArrayList<String> republican_names, Anthill blue, Anthill red)
+    public static AntFactory getInstance(ArrayList<String> fantasy_names, ArrayList<String> democratic_names, ArrayList<String> republican_names, Anthill blue, Anthill red)
     {
         if (self == null)
         {
-            self = new AntFactory(democratic_names, republican_names, blue, red);
+            self = new AntFactory(fantasy_names, democratic_names, republican_names, blue, red);
         }
         return self;
     }
@@ -40,16 +43,24 @@ public class AntFactory
     private void chooseRandomStats(boolean democratic)
     {
         int nameInd;
-        if (democratic)
+        if (Simulation.FREEDOM_MODE)
         {
-            nameInd = random.nextInt(democratic_names.size());
-            name = democratic_names.get(nameInd);
-            democratic_names.remove(nameInd);
+            if (democratic)
+            {
+                nameInd = random.nextInt(democratic_names.size());
+                name = democratic_names.get(nameInd);
+                democratic_names.remove(nameInd);
+            } else
+            {
+                nameInd = random.nextInt(republican_names.size());
+                name = republican_names.get(nameInd);
+                republican_names.remove(nameInd);
+            }
         } else
         {
-            nameInd = random.nextInt(republican_names.size());
-            name = republican_names.get(nameInd);
-            republican_names.remove(nameInd);
+            nameInd = random.nextInt(fantasy_names.size());
+            name = fantasy_names.get(nameInd);
+            fantasy_names.remove(nameInd);
         }
         strength = random.nextInt(10) + 10;
         health = random.nextInt(100) + 100;

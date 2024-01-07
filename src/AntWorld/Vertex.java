@@ -52,12 +52,12 @@ public class Vertex
 
     public void calculate_x(JPanel panel)
     {
-        x = (int) (prep_x * panel.getWidth());
+        x = (int) (prep_x * 0.9 * panel.getWidth());
     }
 
     public void calculate_y(JPanel panel)
     {
-        y = (int) (prep_y * panel.getHeight());
+        y = (int) (prep_y * 0.9 * panel.getHeight());
     }
 
     public int getNumber_of_larvae()

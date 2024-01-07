@@ -21,7 +21,7 @@ public class Collector extends RedAnt implements Collecting
             currentVertex.removeLarvae(amount);
             collected_larvae += amount;
             if (Simulation.VERBOSITY >= 2)
-                System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " collected %d larvae\n", name, amount);
+                System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " collected %d %s\n", name, amount, resource);
             currentVertex.getSemaphore().release();
             if (collected_larvae >= strength)
             {
@@ -30,7 +30,7 @@ public class Collector extends RedAnt implements Collecting
         } else
         {
             if (Simulation.VERBOSITY >= 3)
-                System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " found no larvae\n", name);
+                System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " found no %s\n", name, resource);
             currentVertex.getSemaphore().release();
         }
 
@@ -50,7 +50,7 @@ public class Collector extends RedAnt implements Collecting
             }
             try
             {
-                sleep(Simulation.SLEEP_TIME);
+                sleep(sleep_time);
             } catch (InterruptedException e)
             {
                 break;
@@ -64,7 +64,7 @@ public class Collector extends RedAnt implements Collecting
             }
             try
             {
-                sleep(Simulation.SLEEP_TIME);
+                sleep(sleep_time);
             } catch (InterruptedException e)
             {
                 break;

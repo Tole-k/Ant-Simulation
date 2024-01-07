@@ -29,7 +29,7 @@ abstract public class RedAnt extends Ant
         currentVertex.getSemaphore().release();
         if (currentVertex instanceof Stone)
         {
-            sleep(Simulation.SLEEP_TIME * 10L);
+            sleep(sleep_time * 10L);
         }
     }
 
@@ -37,7 +37,8 @@ abstract public class RedAnt extends Ant
     public void die()
     {
         currentVertex.removeRedAnt(this);
-        System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " died\n", name);
+        if (Simulation.VERBOSITY >= 1)
+            System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " died\n", name);
         super.die();
     }
 
@@ -47,10 +48,10 @@ abstract public class RedAnt extends Ant
         if (collected_larvae > 0)
         {
             if (Simulation.VERBOSITY >= 1)
-                System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + "stored %d food in anthill. ", name, collected_larvae);
+                System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + "stored %d %s in base. ", name, collected_larvae, resource);
             super.storeLarvaeAsFood();
             if (Simulation.VERBOSITY >= 1)
-                System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " has %d food stored\n", anthill.getName(), anthill.getAmount_of_food());
+                System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " has %d %s stored\n", anthill.getName(), anthill.getAmount_of_food(), resource);
         }
     }
 
@@ -61,7 +62,7 @@ abstract public class RedAnt extends Ant
         {
             super.dropLarvae(amount);
             if (Simulation.VERBOSITY >= 2)
-                System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " dropped %d larvae\n", name, amount);
+                System.out.printf(ANSI_COLOR + "%s" + ANSI_RESET + " dropped %d %s\n", name, amount, resource);
         }
     }
 }

@@ -10,6 +10,7 @@ import java.util.Stack;
 abstract public class Ant extends Thread implements Returning, Moving, Dying
 {
     protected static final String ANSI_RESET = "\u001B[0m";
+    protected final String resource;
     protected String name;
     protected int strength;
     protected int health;
@@ -19,6 +20,7 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying
     protected Anthill anthill;
     protected int collected_larvae;
     protected volatile boolean alive;
+    protected int sleep_time = Simulation.SLEEP_TIME;
     private int x;
     private int y;
 
@@ -35,6 +37,10 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying
         alive = true;
         x = new Random().nextInt(20) + 20;
         y = new Random().nextInt(20) + 20;
+        if (Simulation.FREEDOM_MODE)
+            resource = "dollars";
+        else
+            resource = "larvae";
     }
 
     @Override
@@ -63,8 +69,7 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying
         while (!path.empty())
         {
             Vertex v = path.pop();
-            //System.out.println("Returning to anthill...");
-            sleep(Simulation.SLEEP_TIME / 2);
+            sleep(sleep_time / 2);
             move(v);
         }
         assert currentVertex == anthill;

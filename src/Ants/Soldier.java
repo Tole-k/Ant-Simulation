@@ -46,7 +46,7 @@ public class Soldier extends RedAnt implements Fighting
             }
             try
             {
-                sleep(Simulation.SLEEP_TIME);
+                sleep(sleep_time);
             } catch (InterruptedException e)
             {
                 break;
@@ -60,7 +60,7 @@ public class Soldier extends RedAnt implements Fighting
             }
             try
             {
-                sleep(Simulation.SLEEP_TIME);
+                sleep(sleep_time);
             } catch (InterruptedException e)
             {
                 break;

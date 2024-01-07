@@ -1,9 +1,9 @@
 package Factories;
 
-import AntWorld.Anthill;
 import AntWorld.Leaf;
 import AntWorld.Stone;
 import AntWorld.Vertex;
+import Main.Simulation;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -12,7 +12,8 @@ public class VertexFactory
 {
     private static int total_larvae = 0;
     private static VertexFactory self = null;
-    private final ArrayList<String> names;
+    private final ArrayList<String> states;
+    private final ArrayList<String> fantasy_places;
     private final Random random;
     private String name = null;
     private int number_of_larvae;
@@ -20,17 +21,18 @@ public class VertexFactory
     private double y;
 
 
-    private VertexFactory(ArrayList<String> names)
+    private VertexFactory(ArrayList<String> fantasy_places, ArrayList<String> names)
     {
-        this.names = names;
+        this.fantasy_places = fantasy_places;
+        this.states = names;
         this.random = new Random();
     }
 
-    public static VertexFactory getInstance(ArrayList<String> names, Anthill blue, Anthill red)
+    public static VertexFactory getInstance(ArrayList<String> fantasy_places, ArrayList<String> names)
     {
         if (self == null)
         {
-            self = new VertexFactory(names);
+            self = new VertexFactory(fantasy_places, names);
         }
         return self;
     }
@@ -42,9 +44,18 @@ public class VertexFactory
 
     private void chooseRandomStats()
     {
-        int nameInd = random.nextInt(names.size());
-        name = names.get(nameInd);
-        names.remove(nameInd);
+        int nameInd;
+        if (Simulation.FREEDOM_MODE)
+        {
+            nameInd = random.nextInt(states.size());
+            name = states.get(nameInd);
+            states.remove(nameInd);
+        } else
+        {
+            nameInd = random.nextInt(fantasy_places.size());
+            name = fantasy_places.get(nameInd);
+            fantasy_places.remove(nameInd);
+        }
         number_of_larvae = random.nextInt(6);
         x = Math.random();
         y = Math.random();

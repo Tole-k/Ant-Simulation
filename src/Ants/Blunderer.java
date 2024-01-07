@@ -2,7 +2,6 @@ package Ants;
 
 import AntWorld.Anthill;
 import AntWorld.Vertex;
-import Main.Simulation;
 
 public class Blunderer extends Collector
 {
@@ -24,7 +23,7 @@ public class Blunderer extends Collector
         while (!path.empty())
         {
             Vertex v = path.pop();
-            sleep(Simulation.SLEEP_TIME);
+            sleep(sleep_time);
             move(v);
             if (Math.random() < dropChance)
             {
