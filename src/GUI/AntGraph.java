@@ -16,6 +16,7 @@ import java.util.Map;
 
 import static java.lang.Math.max;
 import static java.lang.Math.min;
+
 /**
  * The AntGraph class extends the JPanel class and represents the graphical display of the ant world in the GUI.
  * It includes methods for painting the ant world and updating the graphical display.
@@ -42,9 +43,11 @@ public class AntGraph extends JPanel
         antPopulation = AntPopulation.access();
         world = World.access();
     }
+
     /**
      * This method is called when the AntGraph needs to be painted.
      * It paints the ant world and the ants in it.
+     *
      * @param g The graphics context.
      */
     @Override
@@ -98,14 +101,16 @@ public class AntGraph extends JPanel
                 int yw = entry.getValue().getY();
                 if (v.getNeighbors().contains(w))
                 {
-                    g.drawLine(x + 20, y + 20, xw + 20, yw + 20);
+                    //g.drawLine(x + 20, y + 20, xw + 20, yw + 20);
                 }
             }
         }
     }
+
     /**
      * This method updates the graphical display of the ant world.
      * It paints the ant world and the ants in it off-screen and then copies the off-screen image to the screen.
+     *
      * @param g The graphics context.
      */
     public void updateGraph(Graphics g)
@@ -140,32 +145,40 @@ public class AntGraph extends JPanel
 
         g.drawImage(offScreenImage, 0, 0, this);
     }
+
     /**
      * This method returns the world.
+     *
      * @return The world.
      */
     public World getWorld()
     {
         return world;
     }
+
     /**
      * This method sets the world.
+     *
      * @param world The new world.
      */
     public void setWorld(World world)
     {
         this.world = world;
     }
+
     /**
      * This method returns the ant population.
+     *
      * @return The ant population.
      */
     public AntPopulation getAntPopulation()
     {
         return antPopulation;
     }
+
     /**
      * This method sets the ant population.
+     *
      * @param antPopulation The new ant population.
      */
     public void setAntPopulation(AntPopulation antPopulation)
