@@ -74,7 +74,8 @@ public class Simulation
         } while (blue_size >= 30 || blue_size < 0);
 
         antPopulation = AntPopulation.getInstance(red_size, blue_size);
-        mainFrame = new MainFrame();
+        String title = FREEDOM_MODE ? "Welcome to the Land of the Free and the Home of the Brave!" : "Welcome to the Ant World!";
+        mainFrame = new MainFrame(title);
     }
 
     public void run() throws Exception

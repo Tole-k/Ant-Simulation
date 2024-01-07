@@ -12,9 +12,9 @@ public class MainFrame extends JFrame
     private final ScoreUpdater scoreUpdater;
     private final GraphUpdater graphUpdater;
 
-    public MainFrame()
+    public MainFrame(String title)
     {
-        super("Ant Simulation");
+        super(title);
 
         setSize(1920, 1080);
         getContentPane().setBackground(Color.BLACK);
