@@ -1,12 +1,15 @@
 package GUI;
 
-import Main.Simulation;
+import Main.Pair;
+import Main.World;
+
+import javax.swing.*;
 
 /**
  * The ScoreUpdater class extends the Updater class and is responsible for updating the score panel.
  * It continuously updates the score panel at a rate determined by the sleep time of the simulation.
  */
-public class ScoreUpdater extends Updater
+public class ScoreUpdater extends SwingWorker<Void, Pair>
 {
     // The score panel to be updated
     private final ScorePanel scorePanel;
@@ -32,9 +35,14 @@ public class ScoreUpdater extends Updater
     {
         while (!isCancelled())
         {
-            scorePanel.updateScore();
+            Pair p=new Pair(World.access().getRedAnthill().getAmount_of_food(),World.access().getBlueAnthill().getAmount_of_food());
+            publish(p);
             Thread.sleep(10);
         }
         return null;
+    }
+    @Override protected void process(java.util.List<Pair> pairs) {
+        Pair p=pairs.get(pairs.size()-1);
+        scorePanel.updateScore(p);
     }
 }

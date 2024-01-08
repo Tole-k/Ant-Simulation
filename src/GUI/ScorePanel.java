@@ -1,6 +1,6 @@
 package GUI;
 
-import Main.World;
+import Main.Pair;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,9 +39,9 @@ public class ScorePanel extends JPanel
      * This method updates the score.
      * It updates the red and blue points displays based on the amount of food in the red and blue anthills.
      */
-    public void updateScore()
+    public void updateScore(Pair score)
     {
-        redPoints.updateScore(World.access().getRedAnthill().getAmount_of_food());
-        bluePoints.updateScore(World.access().getBlueAnthill().getAmount_of_food());
+        redPoints.updateScore(score.getX());
+        bluePoints.updateScore(score.getY());
     }
 }
