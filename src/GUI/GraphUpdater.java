@@ -36,7 +36,7 @@ public class GraphUpdater extends Updater
         {
             Graphics g = antGraph.getGraphics();
             antGraph.updateGraph(g);
-            Thread.sleep(Simulation.SLEEP_TIME);
+            Thread.sleep(10);
         }
         return null;
     }

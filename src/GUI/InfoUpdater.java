@@ -33,7 +33,7 @@ public class InfoUpdater extends Updater
         while (!isCancelled())
         {
             infoPanel.updateInfo();
-            Thread.sleep(Simulation.SLEEP_TIME);
+            Thread.sleep(10);
         }
         return null;
     }

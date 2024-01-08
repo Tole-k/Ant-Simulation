@@ -18,7 +18,7 @@ public class Simulation
     // Freedom mode flag
     public static boolean FREEDOM_MODE;
     // Tick rate for the simulation
-    public static int TICK_RATE = 10;
+    public static int TICK_RATE = 5;
     // Sleep time based on the tick rate
     public static int SLEEP_TIME = 1000 / TICK_RATE;
     // Ant population instance

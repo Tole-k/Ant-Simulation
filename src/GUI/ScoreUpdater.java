@@ -33,7 +33,7 @@ public class ScoreUpdater extends Updater
         while (!isCancelled())
         {
             scorePanel.updateScore();
-            Thread.sleep(Simulation.SLEEP_TIME);
+            Thread.sleep(10);
         }
         return null;
     }

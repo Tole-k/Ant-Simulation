@@ -50,16 +50,22 @@ public class InfoPanel extends JPanel
      * This method updates the information panel.
      * It updates the information table with the current state of the ant population.
      */
-    public void updateInfo()
+public void updateInfo()
+{
+    antPopulation.getAnt_semaphore().acquireUninterruptibly();
+    SwingUtilities.invokeLater(() ->
     {
-        antPopulation.getAnt_semaphore().acquireUninterruptibly();
         model.setRowCount(0);
         model.addRow(new Object[]{"Name", "Color", "Class", "Strength", "Health", "Collected " + resource});
-        for (Ant ant : antPopulation.getAnts())
+        int size = antPopulation.getAnts().size();
+        for (int i = 0; i < size; i++)
         {
-            model.addRow(new Object[]{ant.get_Name(), ant.getColor(), ant.getClass().getName().substring(5), ant.getStrength(), ant.getHealth(), ant.getCollected_larvae()});
+            Ant ant = antPopulation.getAnts().get(i);
+            if (ant != null) {
+                model.addRow(new Object[]{ant.get_Name(), ant.getColor(), ant.getClass().getName().substring(5), ant.getStrength(), ant.getHealth(), ant.getCollected_larvae()});
+            }
         }
-
-        antPopulation.getAnt_semaphore().release();
-    }
+    });
+    antPopulation.getAnt_semaphore().release();
+}
 }
