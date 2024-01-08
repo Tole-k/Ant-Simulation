@@ -72,15 +72,15 @@ public class Simulation
         int red_size;
         do
         {
-            System.out.print("Enter the initial number of red ants (0-29): ");
+            System.out.print("Enter the initial number of red ants (0-30): ");
             while (!s.hasNextInt())
             {
-                System.out.print("Enter the initial number of red ants (0-29): ");
+                System.out.print("Enter the initial number of red ants (0-30): ");
                 s.next();
             }
             // Set initial number of red ants based on user input
             red_size = s.nextInt();
-        } while (red_size >= 30 || red_size < 0);
+        } while (red_size > 30 || red_size < 0);
 
         int blue_size;
         do
