@@ -47,7 +47,7 @@ abstract public class BlueAnt extends Ant
         currentVertex.getSemaphore().release();
         if (currentVertex instanceof Stone)
         {
-            sleep(sleep_time * 10L);
+            sleep(sleep_time * 5L);
         }
     }
 
