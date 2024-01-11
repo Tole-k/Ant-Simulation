@@ -119,37 +119,34 @@ public class AntGraph extends JPanel
      */
     public void updateGraph(Graphics g)
     {
-        SwingUtilities.invokeLater(() ->
+        if (offScreenImage == null)
         {
-            if (offScreenImage == null)
-            {
-                offScreenImage = createImage(this.getWidth(), this.getHeight());
-                offScreenGraphics = offScreenImage.getGraphics();
-            }
+            offScreenImage = createImage(this.getWidth(), this.getHeight());
+            offScreenGraphics = offScreenImage.getGraphics();
+        }
 
-            paintComponent(offScreenGraphics);
+        paintComponent(offScreenGraphics);
 
-            for (Ant ant : antPopulation.getAnts())
-            {
-                Pair pair = points.get(ant.getCurrentVertex());
-                int x = pair.getX() + ant.getX();
-                int y = pair.getY() + ant.getY();
-                if (ant instanceof RedAnt)
-                    offScreenGraphics.setColor(Color.RED);
-                else
-                    offScreenGraphics.setColor(Color.BLUE);
-                offScreenGraphics.fillRect(x - 2, y - 2, 5, 5);
-                offScreenGraphics.setColor(Color.BLACK);
-                offScreenGraphics.drawRect(x - 3, y - 3, 6, 6);
-            }
-            for (Vertex v : World.access().getWorld())
-            {
-                offScreenGraphics.setColor(Color.ORANGE);
-                if (v.getNumber_of_larvae() > 0)
-                    offScreenGraphics.drawString(String.valueOf(v.getNumber_of_larvae()), points.get(v).getX() + 40, points.get(v).getY() + 40);
-            }
-            g.drawImage(offScreenImage, 0, 0, this);
-        }); 
+        for (Ant ant : antPopulation.getAnts())
+        {
+            Pair pair = points.get(ant.getCurrentVertex());
+            int x = pair.getX() + ant.getX();
+            int y = pair.getY() + ant.getY();
+            if (ant instanceof RedAnt)
+                offScreenGraphics.setColor(Color.RED);
+            else
+                offScreenGraphics.setColor(Color.BLUE);
+            offScreenGraphics.fillRect(x - 2, y - 2, 5, 5);
+            offScreenGraphics.setColor(Color.BLACK);
+            offScreenGraphics.drawRect(x - 3, y - 3, 6, 6);
+        }
+        for (Vertex v : World.access().getWorld())
+        {
+            offScreenGraphics.setColor(Color.ORANGE);
+            if (v.getNumber_of_larvae() > 0)
+                offScreenGraphics.drawString(String.valueOf(v.getNumber_of_larvae()), points.get(v).getX() + 40, points.get(v).getY() + 40);
+        }
+        g.drawImage(offScreenImage, 0, 0, this);
     }
 
     /**
