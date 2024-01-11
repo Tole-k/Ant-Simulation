@@ -6,6 +6,7 @@ import Main.Simulation;
 /**
  * Soldier class extends RedAnt and implements Fighting interface.
  * This class represents a soldier ant in the simulation.
+ * A soldier ant is a red ant that can attack blue ants.
  */
 public class Soldier extends RedAnt implements Fighting
 {

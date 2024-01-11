@@ -16,6 +16,7 @@ public class RedPoints extends Points
     /**
      * Constructor for the RedPoints class.
      * It initializes the red points display with the given red anthill.
+     *
      * @param red The red anthill whose points are to be displayed.
      */
     public RedPoints(Anthill red)
@@ -27,6 +28,7 @@ public class RedPoints extends Points
 
     /**
      * This method returns the red anthill.
+     *
      * @return The red anthill.
      */
     public Anthill getRed()
@@ -36,6 +38,7 @@ public class RedPoints extends Points
 
     /**
      * This method sets the red anthill.
+     *
      * @param red The new red anthill.
      */
     public void setRed(Anthill red)

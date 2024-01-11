@@ -16,6 +16,7 @@ public class BluePoints extends Points
     /**
      * Constructor for the BluePoints class.
      * It initializes the blue points display with the given blue anthill.
+     *
      * @param blue The blue anthill whose points are to be displayed.
      */
     public BluePoints(Anthill blue)
@@ -27,6 +28,7 @@ public class BluePoints extends Points
 
     /**
      * This method returns the blue anthill.
+     *
      * @return The blue anthill.
      */
     public Anthill getBlue()
@@ -36,6 +38,7 @@ public class BluePoints extends Points
 
     /**
      * This method sets the blue anthill.
+     *
      * @param blue The new blue anthill.
      */
     public void setBlue(Anthill blue)

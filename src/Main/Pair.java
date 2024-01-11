@@ -6,14 +6,13 @@ package Main;
  */
 public class Pair
 {
-    // The first integer in the pair
     private int x;
-    // The second integer in the pair
     private int y;
 
     /**
      * Constructor for the Pair class.
      * It initializes the pair with the given values.
+     *
      * @param x The first integer in the pair.
      * @param y The second integer in the pair.
      */
@@ -25,6 +24,7 @@ public class Pair
 
     /**
      * This method returns the first integer in the pair.
+     *
      * @return The first integer in the pair.
      */
     public int getX()
@@ -34,6 +34,7 @@ public class Pair
 
     /**
      * This method sets the first integer in the pair.
+     *
      * @param x The new value for the first integer in the pair.
      */
     public void setX(int x)
@@ -43,6 +44,7 @@ public class Pair
 
     /**
      * This method returns the second integer in the pair.
+     *
      * @return The second integer in the pair.
      */
     public int getY()
@@ -52,6 +54,7 @@ public class Pair
 
     /**
      * This method sets the second integer in the pair.
+     *
      * @param y The new value for the second integer in the pair.
      */
     public void setY(int y)

@@ -178,56 +178,111 @@ public class AntPopulation
         ant_semaphore.release();
     }
 
+    /**
+     * This method returns the list of all ants in the population.
+     *
+     * @return The list of all ants.
+     */
     public ArrayList<Ant> getAnts()
     {
         return ants;
     }
 
+    /**
+     * This method returns the list of all blue ants in the population.
+     *
+     * @return The list of all blue ants.
+     */
     public ArrayList<BlueAnt> getBlue_ants()
     {
         return blue_ants;
     }
 
+    /**
+     * This method returns the list of all red ants in the population.
+     *
+     * @return The list of all red ants.
+     */
     public ArrayList<RedAnt> getRed_ants()
     {
         return red_ants;
     }
 
+    /**
+     * This method returns the size of the red ant population.
+     *
+     * @return The size of the red ant population.
+     */
     public int getRed_size()
     {
         return red_size;
     }
 
+    /**
+     * This method returns the size of the blue ant population.
+     *
+     * @return The size of the blue ant population.
+     */
     public int getBlue_size()
     {
         return blue_size;
     }
 
+    /**
+     * This method returns the list of democratic names for the ants.
+     *
+     * @return The list of democratic names.
+     */
     public ArrayList<String> getNames()
     {
         return democratic_names;
     }
 
+    /**
+     * This method returns the AntFactory instance used to create new ants.
+     *
+     * @return The AntFactory instance.
+     */
     public AntFactory getAntFactory()
     {
         return antFactory;
     }
 
+    /**
+     * This method returns the World instance in which the ants live.
+     *
+     * @return The World instance.
+     */
     public World getWorld()
     {
         return world;
     }
 
+    /**
+     * This method returns the total size of the ant population.
+     *
+     * @return The total size of the ant population.
+     */
     public int getSize()
     {
         return red_size + blue_size;
     }
 
+    /**
+     * This method returns the Semaphore instance used to control access to the ant population.
+     *
+     * @return The Semaphore instance.
+     */
     public Semaphore getAnt_semaphore()
     {
         return ant_semaphore;
     }
 
+    /**
+     * This method sets the Semaphore instance used to control access to the ant population.
+     *
+     * @param ant_semaphore The Semaphore instance.
+     */
     public void setAnt_semaphore(Semaphore ant_semaphore)
     {
         this.ant_semaphore = ant_semaphore;

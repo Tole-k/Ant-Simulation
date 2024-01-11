@@ -10,7 +10,6 @@ import javax.swing.*;
  */
 abstract public class Points extends JLabel
 {
-    // The world in which the points are displayed
     protected World world;
 
     /**
@@ -26,6 +25,7 @@ abstract public class Points extends JLabel
     /**
      * This method updates the score.
      * It sets the text of the points display to the given points.
+     *
      * @param points The points to be displayed.
      */
     protected void updateScore(int points)
@@ -35,6 +35,7 @@ abstract public class Points extends JLabel
 
     /**
      * This method returns the world.
+     *
      * @return The world.
      */
     public World getWorld()
@@ -44,6 +45,7 @@ abstract public class Points extends JLabel
 
     /**
      * This method sets the world.
+     *
      * @param world The new world.
      */
     public void setWorld(World world)

@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 /**
- * The InfoPanel class extends the JPanel class and represents the information panel in the GUI.
+ * The InfoPanel class extends the JPanel class and represents the ant information panel in the GUI.
  * It includes methods for updating the information panel.
  */
 public class InfoPanel extends JPanel
@@ -50,22 +50,23 @@ public class InfoPanel extends JPanel
      * This method updates the information panel.
      * It updates the information table with the current state of the ant population.
      */
-public void updateInfo()
-{
-    antPopulation.getAnt_semaphore().acquireUninterruptibly();
-    SwingUtilities.invokeLater(() ->
+    public void updateInfo()
     {
-        model.setRowCount(0);
-        model.addRow(new Object[]{"Name", "Color", "Class", "Strength", "Health", "Collected " + resource});
-        int size = antPopulation.getAnts().size();
-        for (int i = 0; i < size; i++)
+        antPopulation.getAnt_semaphore().acquireUninterruptibly();
+        SwingUtilities.invokeLater(() ->
         {
-            Ant ant = antPopulation.getAnts().get(i);
-            if (ant != null) {
-                model.addRow(new Object[]{ant.get_Name(), ant.getColor(), ant.getClass().getName().substring(5), ant.getStrength(), ant.getHealth(), ant.getCollected_larvae()});
+            model.setRowCount(0);
+            model.addRow(new Object[]{"Name", "Color", "Class", "Strength", "Health", "Collected " + resource});
+            int size = antPopulation.getAnts().size();
+            for (int i = 0; i < size; i++)
+            {
+                Ant ant = antPopulation.getAnts().get(i);
+                if (ant != null)
+                {
+                    model.addRow(new Object[]{ant.get_Name(), ant.getColor(), ant.getClass().getName().substring(5), ant.getStrength(), ant.getHealth(), ant.getCollected_larvae()});
+                }
             }
-        }
-    });
-    antPopulation.getAnt_semaphore().release();
-}
+        });
+        antPopulation.getAnt_semaphore().release();
+    }
 }

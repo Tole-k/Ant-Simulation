@@ -8,7 +8,7 @@ import java.util.Random;
 import java.util.Stack;
 
 /**
- * This abstract class represents an Ant, which is a type of Thread.
+ * This abstract class represents an Ant, which runs as a  Thread.
  * It includes methods for moving, dying, storing larvae as food, and dropping larvae.
  * It also includes getter and setter methods for various properties of the Ant.
  */
@@ -58,7 +58,7 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying
     }
 
     /**
-     * This method is used to move the ant to a random vertex.
+     * This method chooses random next Vertex to move.
      *
      * @throws InterruptedException If the thread is interrupted.
      */
@@ -118,7 +118,8 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying
     }
 
     /**
-     * This method is used when the ant dies.
+     * This method is used to make the ant die.
+     * It removes the ant from the current vertex and sets the alive boolean to false.
      */
     @Override
     public void die()
@@ -144,7 +145,8 @@ abstract public class Ant extends Thread implements Returning, Moving, Dying
     }
 
     /**
-     * This method is used to store larvae as food.
+     * Method to store collected larvae in anthill as food.
+     * If the ant has collected any larvae, it stores them as food.
      */
     public void storeLarvaeAsFood()
     {

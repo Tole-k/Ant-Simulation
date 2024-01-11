@@ -6,8 +6,8 @@ import AntWorld.Vertex;
 import Main.Simulation;
 
 /**
- * This abstract class represents a BlueAnt, which is a type of Ant.
- * It includes methods for moving, dying, storing larvae as food, and dropping larvae.
+ * This abstract class  BlueAnt extends Ant.
+ * This class represents a blue ant in the simulation.
  */
 abstract public class BlueAnt extends Ant
 {
@@ -52,7 +52,8 @@ abstract public class BlueAnt extends Ant
     }
 
     /**
-     * This method is used when the ant dies.
+     * This method is used to make the ant die.
+     * It removes the ant from the current vertex and sets the alive boolean to false.
      */
     @Override
     public void die()
@@ -64,7 +65,8 @@ abstract public class BlueAnt extends Ant
     }
 
     /**
-     * This method is used to store larvae as food.
+     * Method to store collected larvae in anthill as food.
+     * If the ant has collected any larvae, it stores them as food.
      */
     @Override
     public void storeLarvaeAsFood()

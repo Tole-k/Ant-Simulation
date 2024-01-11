@@ -21,6 +21,7 @@ public class MainFrame extends JFrame
     /**
      * Constructor for the MainFrame class.
      * It initializes the main frame with the given title and sets up the GUI components.
+     *
      * @param title The title of the main frame.
      */
     public MainFrame(String title)

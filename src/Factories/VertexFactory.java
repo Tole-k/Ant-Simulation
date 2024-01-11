@@ -34,13 +34,13 @@ public class VertexFactory
      * The private constructor for the VertexFactory class.
      * It initializes the factory with lists of names.
      *
-     * @param fantasy_places A list of fantasy names for the vertices.
-     * @param names A list of names for the vertices.
+     * @param fantasy_places A list of fantasy states for the vertices.
+     * @param states         A list of states names for the vertices.
      */
-    private VertexFactory(ArrayList<String> fantasy_places, ArrayList<String> names)
+    private VertexFactory(ArrayList<String> fantasy_places, ArrayList<String> states)
     {
         this.fantasy_places = fantasy_places;
-        this.states = names;
+        this.states = states;
         this.random = new Random();
     }
 
@@ -49,7 +49,7 @@ public class VertexFactory
      * If the instance does not exist, it is created.
      *
      * @param fantasy_places A list of fantasy names for the vertices.
-     * @param names A list of names for the vertices.
+     * @param names          A list of names for the vertices.
      * @return The single instance of the VertexFactory class.
      */
     public static VertexFactory getInstance(ArrayList<String> fantasy_places, ArrayList<String> names)

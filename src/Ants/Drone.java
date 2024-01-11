@@ -5,6 +5,7 @@ import AntWorld.Anthill;
 /**
  * Drone class extends BlueAnt.
  * This class represents a drone ant in the simulation.
+ * A drone ant functions as a cannon fodder.
  */
 public class Drone extends BlueAnt
 {

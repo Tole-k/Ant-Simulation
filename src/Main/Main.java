@@ -9,14 +9,13 @@ public class Main
     /**
      * The main method is the entry point of the application.
      * It creates a new instance of the Simulation class and starts the simulation.
+     *
      * @param args The command-line arguments.
      * @throws Exception if an error occurs during the simulation.
      */
     public static void main(String[] args) throws Exception
     {
-        // Create a new instance of the Simulation class
         Simulation simulation = new Simulation();
-        // Start the simulation
         simulation.run();
     }
 }

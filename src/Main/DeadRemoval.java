@@ -12,6 +12,7 @@ public class DeadRemoval extends Thread
     /**
      * Constructor for the DeadRemoval class.
      * It initializes the ant population.
+     *
      * @param antPopulation The ant population from which dead ants are to be removed.
      */
     public DeadRemoval(AntPopulation antPopulation)
@@ -43,6 +44,7 @@ public class DeadRemoval extends Thread
 
     /**
      * This method returns the ant population.
+     *
      * @return The ant population.
      */
     public AntPopulation getAntPopulation()
@@ -52,6 +54,7 @@ public class DeadRemoval extends Thread
 
     /**
      * This method sets the ant population.
+     *
      * @param antPopulation The new ant population.
      */
     public void setAntPopulation(AntPopulation antPopulation)

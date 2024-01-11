@@ -6,6 +6,7 @@ import Main.Simulation;
 /**
  * Worker class extends BlueAnt and implements Fighting and Collecting interfaces.
  * This class represents a worker ant in the simulation.
+ * A worker ant functions both as a collector of larvae and a fighter.
  */
 public class Worker extends BlueAnt implements Fighting, Collecting
 {

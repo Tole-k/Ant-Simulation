@@ -19,7 +19,8 @@ public class ScorePanel extends JPanel
     /**
      * Constructor for the ScorePanel class.
      * It initializes the score panel with the given red and blue points displays.
-     * @param redPoints The red points display.
+     *
+     * @param redPoints  The red points display.
      * @param bluePoints The blue points display.
      */
     public ScorePanel(RedPoints redPoints, BluePoints bluePoints)

@@ -73,7 +73,7 @@ public class AntFactory
     /**
      * This method chooses random attributes for the ants.
      *
-     * @param democratic A boolean indicating whether the ant is democratic.
+     * @param democratic A boolean used in freedom mode indicating whether the ant name should be democratic.
      */
     private void chooseRandomStats(boolean democratic)
     {

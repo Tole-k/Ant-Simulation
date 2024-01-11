@@ -57,8 +57,8 @@ abstract public class RedAnt extends Ant
     }
 
     /**
-     * Method to kill the ant.
-     * The ant removes itself from the current vertex and dies.
+     * This method is used to make the ant die.
+     * It removes the ant from the current vertex and sets the alive boolean to false.
      */
     @Override
     public void die()
@@ -70,7 +70,7 @@ abstract public class RedAnt extends Ant
     }
 
     /**
-     * Method to store collected larvae as food.
+     * Method to store collected larvae in anthill as food.
      * If the ant has collected any larvae, it stores them as food.
      */
     @Override
@@ -88,7 +88,6 @@ abstract public class RedAnt extends Ant
 
     /**
      * Method to drop larvae.
-     * If the ant has any larvae, it drops them.
      *
      * @param amount The amount of larvae to drop.
      */

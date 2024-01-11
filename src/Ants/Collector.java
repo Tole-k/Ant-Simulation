@@ -6,6 +6,7 @@ import Main.Simulation;
 /**
  * Collector class extends RedAnt and implements Collecting interface.
  * This class represents a collector ant in the simulation.
+ * A collector ant collects larvae from a vertex and returns to the anthill when it has collected enough larvae.
  */
 public class Collector extends RedAnt implements Collecting
 {
