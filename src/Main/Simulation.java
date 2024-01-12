@@ -80,14 +80,14 @@ public class Simulation
         int blue_size;
         do
         {
-            System.out.print("Enter the initial number of blue ants (0-29): ");
+            System.out.print("Enter the initial number of blue ants (0-30): ");
             while (!s.hasNextInt())
             {
-                System.out.print("Enter the initial number of blue ants (0-29): ");
+                System.out.print("Enter the initial number of blue ants (0-30): ");
                 s.next();
             }
             blue_size = s.nextInt();
-        } while (blue_size >= 30 || blue_size < 0);
+        } while (blue_size > 30 || blue_size < 0);
 
         antPopulation = AntPopulation.getInstance(red_size, blue_size);
         String title = FREEDOM_MODE ? "Welcome to the Land of the Free and the Home of the Brave!" : "Welcome to the Ant World!";
