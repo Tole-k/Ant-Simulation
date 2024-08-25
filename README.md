@@ -1,3 +1,4 @@
+# Ant Simulation
 This is a program simulating a competition between two ant colonies. At the top of the screen there is score counter
 indicating how much larvae was gathered and brought back to the anthill by blue and red ants respectively. At the center
 of the screen there is an ants' world represented by a graph with nodes, places which ants can occupy, and edges, paths
